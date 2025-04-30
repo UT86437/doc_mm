@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>XAIDrift.get_drift &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="XAIDrift.get_report" href="model_monitoring.XAI_drift.XAIDrift.get_report.html" />
+    <link rel="prev" title="XAIDrift.__init__" href="model_monitoring.XAI_drift.XAIDrift.__init__.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI_drift.XAIDrift.get_report.html" title="XAIDrift.get_report"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI_drift.XAIDrift.__init__.html" title="XAIDrift.__init__"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI_drift.html" >XAI_drift</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.XAI_drift.XAIDrift.html" accesskey="U">XAIDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAIDrift.get_drift</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="xaidrift-get-drift">
+<h1>XAIDrift.get_drift<a class="headerlink" href="#xaidrift-get-drift" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.XAI_drift.XAIDrift.get_drift">
+<span class="sig-prename descclassname"><span class="pre">XAIDrift.</span></span><span class="sig-name descname"><span class="pre">get_drift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xai_psi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psi_config_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.XAI_drift.XAIDrift.get_drift" title="Link to this definition">¶</a></dt>
+<dd><p>Calcola e aggiorna il report sul drift dell’importanza delle feature, inclusi eventuali avvisi relativi.</p>
+<p>Questa funzione calcola il drift dell’importanza delle feature confrontando l’importanza delle feature nel modello corrente rispetto al modello storico.
+Viene anche calcolato il PSI (Population Stability Index) per le feature, se richiesto, per monitorare la stabilità delle distribuzioni dell’importanza delle feature nel tempo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xai_psi</strong> (<cite>bool</cite>, opzionale) – Se True, calcola il PSI per l’importanza delle feature. Default: <cite>True</cite>.</p></li>
+<li><p><strong>psi_config_threshold</strong> (<cite>dict</cite>, opzionale) – Dizionario contenente le soglie per il calcolo del PSI. Default: <cite>None</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Se le soglie di PSI non vengono configurate, il metodo utilizza i valori predefiniti specificati nella classe <a class="reference internal" href="../model_monitoring.data_drift/model_monitoring.data_drift.DataDrift.html#model_monitoring.data_drift.DataDrift" title="model_monitoring.data_drift.DataDrift"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataDrift</span></code></a> per determinare il drift.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">XAIDrift.get_drift</a><ul>
+<li><a class="reference internal" href="#model_monitoring.XAI_drift.XAIDrift.get_drift"><code class="docutils literal notranslate"><span class="pre">XAIDrift.get_drift()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI_drift.XAIDrift.__init__.html"
+                          title="previous chapter">XAIDrift.__init__</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI_drift.XAIDrift.get_report.html"
+                          title="next chapter">XAIDrift.get_report</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.XAI_drift/model_monitoring.XAI_drift.XAIDrift.get_drift.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI_drift.XAIDrift.get_report.html" title="XAIDrift.get_report"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI_drift.XAIDrift.__init__.html" title="XAIDrift.__init__"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI_drift.html" >XAI_drift</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.XAI_drift.XAIDrift.html" >XAIDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAIDrift.get_drift</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>XAI.fit &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="XAI.get_feature_importance" href="model_monitoring.XAI.XAI.get_feature_importance.html" />
+    <link rel="prev" title="XAI.__init__" href="model_monitoring.XAI.XAI.__init__.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.get_feature_importance.html" title="XAI.get_feature_importance"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.__init__.html" title="XAI.__init__"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI.html" >XAI</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.XAI.XAI.html" accesskey="U">XAI</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAI.fit</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="xai-fit">
+<h1>XAI.fit<a class="headerlink" href="#xai-fit" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.XAI.XAI.fit">
+<span class="sig-prename descclassname"><span class="pre">XAI.</span></span><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manage_groups</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.XAI.XAI.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Addestra il modello utilizzando i dati forniti e i parametri configurati nella classe.</p>
+<p>Questo metodo gestisce il processo di addestramento:</p>
+<ol class="arabic">
+<li><p>Convalida i dati di input (<cite>db</cite>, <cite>output_model</cite>).</p></li>
+<li><p>Se <cite>algo_type</cite> è ‘auto’ per l’approccio supervisionato, verrà determinato in base al numero di valori unici di <cite>output_model</cite>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>&lt;=2 -&gt; ‘classification’ (Classificazione Binaria)</p></li>
+<li><p>&lt;11 -&gt; ‘multiclass’ (Classificazione Multiclasse)</p></li>
+<li><p>&gt;=11 -&gt; ‘regression’ (Regressione)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Seleziona il modello base (LGBM default o custom).</p></li>
+<li><p>Se <cite>use_cv=True</cite>, imposta l’oggetto di ricerca degli iperparametri tramite CV (es. <cite>RandomizedSearchCV</cite>).</p></li>
+<li><p>Se <cite>standardize=True</cite>, applica uno Standard Scaler ai dati di input.</p></li>
+<li><p>Gestisce le feature categoriche:</p>
+<ul class="simple">
+<li><p>Per <cite>model_input=’default’</cite> (LGBM): Converte le colonne ‘object’ in ‘category’ (le colonne ‘category’ vengono gestite dalla libreria LGBM).</p></li>
+<li><p>Per <cite>model_input=’custom’</cite>: Applica One-Hot Encoding (standard o Top-N basato sull’attributo <cite>dim_cat_threshold</cite>). I dati trasformati vengono salvati nell’attributo <cite>db_tsf</cite>.</p></li>
+</ul>
+</li>
+<li><p>Configura lo splitter CV per gestire i gruppi, se <cite>manage_groups=True</cite>.</p></li>
+<li><p>Addestra il modello (attributo <cite>model</cite> o l’oggetto CV) utilizzando gli attributi <cite>db_tsf</cite> (o <cite>db</cite> se non trasformato) e <cite>output_model</cite>.</p></li>
+<li><p>Se è stata usata la CV, estrae i migliori parametri.</p></li>
+<li><p>Salva il modello finale addestrato nell’attributo <cite>model_fitted</cite>.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db</strong> (<cite>pd.DataFrame</cite>) – Il <cite>DataFrame</cite> contenente le feature di input per l’addestramento.</p></li>
+<li><p><strong>output_model</strong> (<cite>pd.Series</cite>/<cite>np.array</cite>) – La variabile target (per approccio supervisionato) o le etichette di cluster (per approccio non supervisionato). Deve avere la stessa lunghezza (numero di righe) di <cite>db</cite>.</p></li>
+<li><p><strong>manage_groups</strong> (<cite>bool</cite>, optional) – Se <cite>True</cite>, indica che la CV deve tenere conto dei gruppi specificati nell’argomento <cite>groups</cite> per evitare che campioni dello stesso gruppo finiscano in fold diversi. Richiede l’uso di splitter CV compatibili come <cite>GroupKFold</cite> o <cite>StratifiedGroupKFold</cite>. Default: <cite>False</cite>.</p></li>
+<li><p><strong>groups</strong> (<cite>pd.Series</cite>/<cite>None</cite>, optional) – Una Serie pandas con lo stesso indice di <cite>db</cite>, contenente l’identificativo del gruppo per ciascun campione. Richiesto e utilizzato solo se <cite>manage_groups=True</cite>. Default: <cite>None</cite>.</p></li>
+<li><p><strong>standardize</strong> (<cite>bool</cite>, optional) – Se <cite>True</cite>, applica un metodo di scaling (StandardScaler) ai dati di input. Default: <cite>False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Per <cite>approach_type=’unsupervised’</cite>, <cite>output_model</cite> rappresenta le etichette di cluster. Il modello addestrato (<cite>model_fitted</cite>) sarà un classificatore (LGBM default o custom) che impara a predire queste etichette dalle feature in <cite>db</cite>.</p></li>
+<li><p>La gestione delle feature categoriche avviene così: LGBM le gestisce nativamente se sono di tipo ‘category’, mentre per altri modelli è necessario il OHE (One-Hot Encoding).</p></li>
+<li><p>Il <cite>DataFrame</cite> effettivamente utilizzato per l’addestramento (potenzialmente dopo OHE) è memorizzato in <cite>db_tsf</cite>.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">XAI.fit</a><ul>
+<li><a class="reference internal" href="#model_monitoring.XAI.XAI.fit"><code class="docutils literal notranslate"><span class="pre">XAI.fit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI.XAI.__init__.html"
+                          title="previous chapter">XAI.__init__</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI.XAI.get_feature_importance.html"
+                          title="next chapter">XAI.get_feature_importance</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.XAI/model_monitoring.XAI.XAI.fit.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.get_feature_importance.html" title="XAI.get_feature_importance"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.__init__.html" title="XAI.__init__"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI.html" >XAI</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.XAI.XAI.html" >XAI</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAI.fit</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PerformancesMeasures.__init__ &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="PerformancesMeasures.compute_metrics" href="model_monitoring.performance_measures.PerformancesMeasures.compute_metrics.html" />
+    <link rel="prev" title="PerformancesMeasures" href="model_monitoring.performance_measures.PerformancesMeasures.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.performance_measures.PerformancesMeasures.compute_metrics.html" title="PerformancesMeasures.compute_metrics"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.performance_measures.PerformancesMeasures.html" title="PerformancesMeasures"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.performance_measures.html" >performance_measures</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.performance_measures.PerformancesMeasures.html" accesskey="U">PerformancesMeasures</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PerformancesMeasures.__init__</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="performancesmeasures-init">
+<h1>PerformancesMeasures.__init__<a class="headerlink" href="#performancesmeasures-init" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.performance_measures.PerformancesMeasures.__init__">
+<span class="sig-prename descclassname"><span class="pre">PerformancesMeasures.</span></span><span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">approach_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'supervised'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impute_nans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.performance_measures.PerformancesMeasures.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Inizializza l’oggetto PerformancesMeasures per configurare il calcolo delle metriche.</p>
+<p>Questo costruttore imposta il tipo di approccio (supervisionato/non supervisionato), il tipo di modello, come selezionare le metriche (standard, aggiuntive, nuove), e opzioni specifiche come l’imputazione dei NaN per il clustering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>approach_type</strong> (<cite>str</cite>, optional) – Specifica l’approccio di machine learning.
+Deve essere ‘supervised’ o ‘unsupervised’.
+Default: ‘supervised’.</p></li>
+<li><p><strong>model_type</strong> (<cite>str</cite>, optional) – <p>Specifica il tipo di modello.</p>
+<ul>
+<li><p>Per <cite>approach_type=’supervised’</cite>: ‘regression’, ‘classification’, ‘multiclass’, o ‘auto’. Se ‘auto’, il tipo verrà dedotto dai dati <cite>target</cite> durante <cite>compute_metrics</cite>.</p></li>
+<li><p>Per <cite>approach_type=’unsupervised’</cite>: Deve essere ‘clustering’.</p></li>
+</ul>
+<p>Default: ‘auto’.</p>
+</p></li>
+<li><p><strong>set_metrics</strong> (<cite>str</cite>, optional) – <p>Definisce come vengono impostate le metriche da calcolare.</p>
+<ul>
+<li><p>’standard’: Usa le metriche predefinite per il <cite>model_type</cite> specificato.</p></li>
+<li><p>’add’: Aggiunge le metriche in <cite>new_metrics</cite> a quelle standard.</p></li>
+<li><p>’new’: Usa <strong>solo</strong> le metriche specificate in <cite>new_metrics</cite>.</p></li>
+</ul>
+<p>Default: ‘standard’.</p>
+</p></li>
+<li><p><strong>new_metrics</strong> (<cite>dict</cite>/<cite>list</cite>/<cite>None</cite>, optional) – <p>Metriche personalizzate da aggiungere o usare.</p>
+<ul>
+<li><p>Per <cite>approach_type=’supervised’</cite>: Un dizionario dove le chiavi sono le funzioni delle metriche e i valori sono stringhe che indicano l’input richiesto dalla metrica: ‘pred’ per le predizioni, ‘prob’ per le probabilità.</p></li>
+</ul>
+<p>Esempio: <cite>{matthews_corrcoef: ‘pred’, log_loss: ‘prob’}</cite>.</p>
+<ul>
+<li><p>Per <cite>approach_type=’unsupervised’</cite>: Una lista di funzioni di metriche.
+Esempio: <cite>[silhouette_score, davies_bouldin_score]</cite>.</p></li>
+</ul>
+<p>Default: <cite>None</cite>.</p>
+</p></li>
+<li><p><strong>impute_nans</strong> (<cite>bool</cite>, optional) – Se <cite>True</cite> e <cite>approach_type=’unsupervised’</cite>, i valori NaN nella <cite>data_matrix</cite> verranno imputati usando una strategia basata sui cluster prima del calcolo delle metriche (vedi <cite>Imputazione NaN</cite> in <a class="reference internal" href="model_monitoring.performance_measures.PerformancesMeasures.html#model_monitoring.performance_measures.PerformancesMeasures" title="model_monitoring.performance_measures.PerformancesMeasures"><code class="xref py py-class docutils literal notranslate"><span class="pre">PerformancesMeasures</span></code></a>). Ignorato se <cite>approach_type=’supervised’</cite>.
+Default: <cite>False</cite>.</p></li>
+<li><p><strong>**kwargs</strong> – Parametri aggiuntivi che possono essere utilizzati da specifiche metriche o funzioni interne.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><p>Se <cite>model_type</cite> è ‘auto’ per l’approccio supervisionato, verrà determinato in <cite>compute_metrics</cite> in base al numero di valori unici nel <cite>target</cite>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>&lt;=2 -&gt; ‘classification’ (Classificazione Binaria)</p></li>
+<li><p>&lt;11 -&gt; ‘multiclass’ (Classificazione Multiclasse)</p></li>
+<li><p>&gt;=11 -&gt; ‘regression’ (Regressione)</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">PerformancesMeasures.__init__</a><ul>
+<li><a class="reference internal" href="#model_monitoring.performance_measures.PerformancesMeasures.__init__"><code class="docutils literal notranslate"><span class="pre">PerformancesMeasures.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.performance_measures.PerformancesMeasures.html"
+                          title="previous chapter">PerformancesMeasures</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.performance_measures.PerformancesMeasures.compute_metrics.html"
+                          title="next chapter">PerformancesMeasures.compute_metrics</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.performance_measures/model_monitoring.performance_measures.PerformancesMeasures.__init__.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.performance_measures.PerformancesMeasures.compute_metrics.html" title="PerformancesMeasures.compute_metrics"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.performance_measures.PerformancesMeasures.html" title="PerformancesMeasures"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.performance_measures.html" >performance_measures</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.performance_measures.PerformancesMeasures.html" >PerformancesMeasures</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PerformancesMeasures.__init__</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

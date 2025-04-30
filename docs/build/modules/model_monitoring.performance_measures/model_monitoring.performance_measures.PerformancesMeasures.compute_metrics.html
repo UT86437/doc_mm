@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PerformancesMeasures.compute_metrics &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="reference_metadata" href="../model_monitoring.reference_metadata.html" />
+    <link rel="prev" title="PerformancesMeasures.__init__" href="model_monitoring.performance_measures.PerformancesMeasures.__init__.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.reference_metadata.html" title="reference_metadata"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.performance_measures.PerformancesMeasures.__init__.html" title="PerformancesMeasures.__init__"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.performance_measures.html" >performance_measures</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.performance_measures.PerformancesMeasures.html" accesskey="U">PerformancesMeasures</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PerformancesMeasures.compute_metrics</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="performancesmeasures-compute-metrics">
+<h1>PerformancesMeasures.compute_metrics<a class="headerlink" href="#performancesmeasures-compute-metrics" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.performance_measures.PerformancesMeasures.compute_metrics">
+<span class="sig-prename descclassname"><span class="pre">PerformancesMeasures.</span></span><span class="sig-name descname"><span class="pre">compute_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_prop_true</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.performance_measures.PerformancesMeasures.compute_metrics" title="Link to this definition">¶</a></dt>
+<dd><p>Calcola le metriche di performance configurate sui dati forniti.</p>
+<p>Questo metodo esegue il calcolo effettivo delle metriche definite durante l’inizializzazione della classe, utilizzando i dati di input appropriati per l’approccio (supervisionato o non supervisionato) e il tipo di modello.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<cite>np.array</cite>/<cite>pd.Series</cite>/<cite>None</cite>, optional) – I valori reali o ground truth. Richiesto per <cite>approach_type=’supervised’</cite>.
+Default: <cite>None</cite>.</p></li>
+<li><p><strong>predictions</strong> (<cite>np.array</cite>/<cite>pd.Series</cite>/<cite>None</cite>, optional) – Le predizioni del modello. Richiesto per <cite>model_type=’regression’</cite>. Per ‘classification’/’multiclass’, può essere omesso se <cite>prob</cite> è fornito (verrà derivato usando <cite>classification_threshold</cite>).
+Default: <cite>None</cite>.</p></li>
+<li><p><strong>prob</strong> (<cite>np.array</cite>/<cite>pd.Series</cite>/<cite>None</cite>, optional) – Le probabilità predette dal modello. Utilizzato per metriche specifiche di classificazione (es. ROC AUC, LogLoss). Per ‘classification’, se <cite>predictions</cite> non è fornito, queste probabilità vengono usate per generare le predizioni binarie. Per ‘multiclass’, può contenere array di probabilità per classe.
+Default: <cite>None</cite>.</p></li>
+<li><p><strong>cluster_labels</strong> (<cite>np.array</cite>/<cite>pd.Series</cite>/<cite>None</cite>, optional) – Le etichette assegnate a ciascun cluster di dati. Richiesto per <cite>approach_type=’unsupervised’</cite>.
+Default: <cite>None</cite>.</p></li>
+<li><p><strong>data_matrix</strong> (<cite>pd.DataFrame</cite>/<cite>np.array</cite>/<cite>None</cite>, optional) – La matrice di dati (features) utilizzata per il clustering. Richiesta per <cite>approach_type=’unsupervised’</cite>.
+Default: <cite>None</cite>.</p></li>
+<li><p><strong>return_prop_true</strong> (<cite>bool</cite>, optional) – Se <cite>True</cite> e il modello è di classificazione binaria, aggiunge la proporzione di etichette positive nel <cite>target</cite> alla chiave ‘proportion_1’ del dizionario dei risultati.
+Default: <cite>True</cite>.</p></li>
+<li><p><strong>classification_threshold</strong> (<cite>float</cite>, optional) – La soglia utilizzata per convertire le probabilità (<cite>prob</cite>) in predizioni binarie (0 o 1) per i modelli di classificazione binaria, solo se <cite>predictions</cite> non viene fornito esplicitamente.
+Default: 0.5.</p></li>
+<li><p><strong>**kwargs</strong> (<cite>dict</cite>, opzionale) – Altri parametri opzionali da passare alla funzione, che possono includere le configurazioni personalizzate per il calcolo delle metriche.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Un dizionario contenente i nomi delle metriche calcolate come chiavi e i loro valori numerici come valori.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>dict</cite></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><p>Se <cite>model_type</cite> è ‘auto’ per l’approccio supervisionato, viene determinato qui basandosi sui valori unici nel <cite>target</cite>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>&lt;=2 -&gt; ‘classification’ (Classificazione Binaria)</p></li>
+<li><p>&lt;11 -&gt; ‘multiclass’ (Classificazione Multiclasse)</p></li>
+<li><p>&gt;=11 -&gt; ‘regression’ (Regressione)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Per quanto riguarda la gestione dei valori <cite>NaN</cite>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Le righe con <cite>NaN</cite> in <cite>cluster_labels</cite> vengono rimosse sia da <cite>cluster_labels</cite> che da <cite>data_matrix</cite>.</p></li>
+<li><p>Se <cite>data_matrix</cite> contiene <cite>NaN</cite> e in <cite>__init__</cite> il parametro <cite>impute_nans</cite> è <cite>True</cite>, i <cite>NaN</cite> vengono imputati attreverso una strategia basata sui cluster prima del calcolo delle metriche (vedi <cite>Imputazione NaN</cite> in <a class="reference internal" href="model_monitoring.performance_measures.PerformancesMeasures.html#model_monitoring.performance_measures.PerformancesMeasures" title="model_monitoring.performance_measures.PerformancesMeasures"><code class="xref py py-class docutils literal notranslate"><span class="pre">PerformancesMeasures</span></code></a>). Se è <cite>False</cite>, il calcolo di alcune metriche potrebbe fallire.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Per metriche come ROC AUC in contesti multiclasse, viene utilizzata la strategia One-vs-Rest (<cite>multi_class=’ovr’</cite>).</p></li>
+<li><p>Se il <cite>target</cite> ha un solo valore unico, alcune metriche (es. ROC AUC) non possono essere calcolate e verrà emesso un <cite>warning</cite>.</p></li>
+<li><p>Per quanto riguarda il contesto di clustering i valori che posso settare nei <cite>kwargs</cite> per la metrica di clustering predefinita sono <cite>n_splits</cite> (default 5) e <cite>classification_clustering_metric</cite> (default ‘balanced_accuracy_score’), rispettivamnete il numero di split e la metrica di validazione di classificazione. Inoltre posso controllare l’imputazione dei <cite>NaN</cite> tramite i parametri <cite>k</cite> (default 5) e <cite>size</cite> (default 500), rispettivamente il numero di neighbors e il numero di campioni in cui cercare i k-neighbors.</p></li>
+</ul>
+</div>
+<p><strong>Dati utilizzati per gli esempi</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_esempio</span>
+</pre></div>
+</div>
+<style>
+   /* Stile base per la tabella con la nostra classe specifica */
+   .jupyter-style-table {
+       border-collapse: collapse; /* Bordi uniti */
+       margin: 1em 0; /* Margine sopra/sotto */
+       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Font simile a Jupyter */
+       font-size: 0.9em; /* Dimensione font leggermente ridotta */
+       border: 1px solid #d3d3d3; /* Bordo esterno leggero */
+       width: auto; /* Larghezza basata sul contenuto */
+       max-width: 100%; /* Non superare il contenitore */
+       overflow-x: auto; /* Abilita lo scroll orizzontale se necessario (meglio sul wrapper, ma ok qui) */
+       display: block; /* Necessario per far funzionare overflow-x su una tabella */
+   }
+
+   /* Stile per le celle dell'header (th) */
+   .jupyter-style-table thead th {
+       background-color: #f5f5f5; /* Sfondo grigio chiaro per header */
+       font-weight: bold; /* Grassetto */
+       padding: 8px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (spesso a destra per numeri/default) */
+       border-bottom: 1px solid #d3d3d3; /* Linea sotto l'header */
+       vertical-align: bottom; /* Allineamento verticale */
+   }
+
+   /* Stile per le celle dei dati (td) */
+   .jupyter-style-table tbody td {
+       padding: 6px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (aggiusta se hai testo a sinistra) */
+       border-right: 1px solid #d3d3d3; /* Linea verticale tra celle (opzionale) */
+       border-top: 1px solid #d3d3d3; /* Linea orizzontale tra righe */
+       vertical-align: middle; /* Allineamento verticale */
+   }
+   .jupyter-style-table tbody td:last-child {
+       border-right: none; /* Rimuovi bordo destro sull'ultima cella */
+   }
+
+   /* Stile per l'header dell'indice (se presente) */
+   .jupyter-style-table thead th.blank { /* Header vuoto sopra l'indice */
+       background-color: white;
+       border: none;
+   }
+   .jupyter-style-table tbody th { /* Celle dell'indice nel body */
+       padding: 6px 10px;
+       text-align: right;
+       font-weight: normal;
+       border-right: 1px solid #d3d3d3;
+       border-top: 1px solid #d3d3d3;
+       background-color: #f5f5f5; /* Sfondo leggero per indice */
+   }
+
+
+   /* Striping delle righe (alternanza colori) */
+   .jupyter-style-table tbody tr:nth-child(even) {
+       background-color: #f9f9f9; /* Sfondo molto leggero per righe pari */
+   }
+
+   /* Effetto Hover (cambio colore al passaggio del mouse) */
+   .jupyter-style-table tbody tr:hover {
+       background-color: #f0f0f0; /* Sfondo leggermente più scuro su hover */
+   }
+</style>
+
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>feature_num</th>      <th>feature_cat</th>      <th>target_clf</th>      <th>pred_clf</th>      <th>target_reg</th>      <th>pred_reg</th>      <th>prob_clf</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>2</td>      <td>B</td>      <td>0</td>      <td>0</td>      <td>7.652628</td>      <td>-1.427613</td>      <td>0.032526</td>    </tr>    <tr>      <th>1</th>      <td>3</td>      <td>A</td>      <td>1</td>      <td>0</td>      <td>17.712800</td>      <td>3.589763</td>      <td>0.474443</td>    </tr>    <tr>      <th>2</th>      <td>4</td>      <td>C</td>      <td>0</td>      <td>0</td>      <td>17.682912</td>      <td>32.339399</td>      <td>0.482816</td>    </tr>    <tr>      <th>3</th>      <td>5</td>      <td>B</td>      <td>0</td>      <td>0</td>      <td>22.671351</td>      <td>20.413588</td>      <td>0.404199</td>    </tr>    <tr>      <th>4</th>      <td>6</td>      <td>A</td>      <td>0</td>      <td>1</td>      <td>31.209811</td>      <td>31.885093</td>      <td>0.652307</td>    </tr>    <tr>      <th>5</th>      <td>7</td>      <td>C</td>      <td>1</td>      <td>0</td>      <td>25.433599</td>      <td>11.186117</td>      <td>0.048836</td>    </tr>    <tr>      <th>6</th>      <td>8</td>      <td>D</td>      <td>0</td>      <td>1</td>      <td>31.375411</td>      <td>25.931584</td>      <td>0.842117</td>    </tr>    <tr>      <th>7</th>      <td>9</td>      <td>E</td>      <td>0</td>      <td>1</td>      <td>42.188562</td>      <td>43.297788</td>      <td>0.720076</td>    </tr>    <tr>      <th>8</th>      <td>10</td>      <td>C</td>      <td>0</td>      <td>1</td>      <td>44.935844</td>      <td>33.425909</td>      <td>0.561019</td>    </tr>    <tr>      <th>9</th>      <td>11</td>      <td>A</td>      <td>1</td>      <td>0</td>      <td>56.571237</td>      <td>60.328217</td>      <td>0.247588</td>    </tr>  </tbody></table><p><strong>Esempio:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">model_monitoring.performance_measures</span><span class="w"> </span><span class="kn">import</span> <span class="n">PerformancesMeasures</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">model_monitoring.additional_metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">lift_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Perf_Meas</span> <span class="o">=</span> <span class="n">PerformancesMeasures</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span> <span class="n">set_metrics</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span><span class="n">new_metrics</span><span class="o">=</span><span class="p">{</span><span class="n">lift_score</span><span class="p">:</span><span class="s2">&quot;prob&quot;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dict_perf</span> <span class="o">=</span> <span class="n">Perf_Meas</span><span class="o">.</span><span class="n">compute_metrics</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">df_esempio</span><span class="p">[</span><span class="s1">&#39;target_clf&#39;</span><span class="p">],</span> <span class="n">predictions</span><span class="o">=</span><span class="n">df_esempio</span><span class="p">[</span><span class="s1">&#39;pred_clf&#39;</span><span class="p">],</span> <span class="n">prob</span><span class="o">=</span><span class="n">df_esempio</span><span class="p">[</span><span class="s1">&#39;prob_clf&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dict_perf</span>
+<span class="go">{&#39;balanced_accuracy_score&#39;: 0.21428571428571427,</span>
+<span class="go"> &#39;accuracy_score&#39;: 0.3,</span>
+<span class="go"> &#39;precision_score&#39;: 0.0,</span>
+<span class="go"> &#39;recall_score&#39;: 0.0,</span>
+<span class="go"> &#39;f1_score&#39;: 0.0,</span>
+<span class="go"> &#39;roc_auc_score&#39;: 0.1904761904761905,</span>
+<span class="go"> &#39;lift_score&#39;: 0.0,</span>
+<span class="go"> &#39;proportion_1&#39;: 0.3}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">PerformancesMeasures.compute_metrics</a><ul>
+<li><a class="reference internal" href="#model_monitoring.performance_measures.PerformancesMeasures.compute_metrics"><code class="docutils literal notranslate"><span class="pre">PerformancesMeasures.compute_metrics()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.performance_measures.PerformancesMeasures.__init__.html"
+                          title="previous chapter">PerformancesMeasures.__init__</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../model_monitoring.reference_metadata.html"
+                          title="next chapter">reference_metadata</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.performance_measures/model_monitoring.performance_measures.PerformancesMeasures.compute_metrics.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.reference_metadata.html" title="reference_metadata"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.performance_measures.PerformancesMeasures.__init__.html" title="PerformancesMeasures.__init__"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.performance_measures.html" >performance_measures</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.performance_measures.PerformancesMeasures.html" >PerformancesMeasures</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PerformancesMeasures.compute_metrics</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

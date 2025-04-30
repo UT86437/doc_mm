@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>XAI.get_feature_importance &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="XAI.get_report" href="model_monitoring.XAI.XAI.get_report.html" />
+    <link rel="prev" title="XAI.fit" href="model_monitoring.XAI.XAI.fit.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.get_report.html" title="XAI.get_report"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.fit.html" title="XAI.fit"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI.html" >XAI</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.XAI.XAI.html" accesskey="U">XAI</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAI.get_feature_importance</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="xai-get-feature-importance">
+<h1>XAI.get_feature_importance<a class="headerlink" href="#xai-get-feature-importance" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.XAI.XAI.get_feature_importance">
+<span class="sig-prename descclassname"><span class="pre">XAI.</span></span><span class="sig-name descname"><span class="pre">get_feature_importance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feat_imp_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'shap'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shap_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tree'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_weighted_kmeans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_deep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_repeats_permutation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perm_crit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.XAI.XAI.get_feature_importance" title="Link to this definition">¶</a></dt>
+<dd><p>Calcola e restituisce l’importanza delle feature del modello addestrato.</p>
+<p>Questo metodo calcola l’importanza di ciascuna feature utilizzando la tecnica specificata in <cite>feat_imp_mode</cite>. Gestisce l’aggregazione dei punteggi nel caso di One-Hot Encoding e normalizza i risultati.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feat_imp_mode</strong> (<cite>str</cite>, optional) – <p>Metodo per calcolare l’importanza. Opzioni:</p>
+<ul>
+<li><p>’shap’: Calcola i valori SHAP aggregando per somma l’impatto di ciascuna feature sulla singola previsione.</p></li>
+<li><p>’permutation’: Misura l’importanza valutando quanto peggiora la performance del modello se i valori di una feature vengono mescolati casualmente.</p></li>
+<li><p>’gini’: Usa l’importanza basata sulla riduzione media dell’impurità di Gini nei nodi degli alberi (specifica per modelli ad albero come RandomForest/GradientBoosting).</p></li>
+<li><p>’coef’: Usa i coefficienti diretti del modello, che rappresentano il peso di ciascuna feature in modelli lineari.</p></li>
+</ul>
+<p>Default: ‘shap’.</p>
+</p></li>
+<li><p><strong>shap_type</strong> (<cite>str</cite>, optional) – <p>Tipo di SHAP explainer da usare se <cite>feat_imp_mode=’shap’</cite>:</p>
+<ul>
+<li><p>’tree’: Ottimizzato per modelli ad albero (es. LightGBM, XGBoost, CatBoost, RandomForest).</p></li>
+<li><p>’kernel’: Model-agnostic, può spiegare qualsiasi modello black-box.</p></li>
+<li><p>’deep’: Per modelli di deep learning (TensorFlow/Keras, PyTorch).</p></li>
+</ul>
+<p>Default: ‘tree’.</p>
+</p></li>
+<li><p><strong>n_weighted_kmeans</strong> (<cite>int</cite>, optional) – Numero di centroidi usati nei raggruppamenti nei dati di background per <cite>shap_type=’kernel’</cite>. Default: 10.</p></li>
+<li><p><strong>n_samples_deep</strong> (<cite>int</cite>, optional) – Numero di campioni usati nei raggruppamenti nei dati di background per <cite>shap_type=’deep’</cite>. Default: 1000.</p></li>
+<li><p><strong>n_repeats_permutation</strong> (<cite>int</cite>, optional) – Numero di ripetizioni per calcolare la Permutation Importance per ciascuna feature. Usato solo se <cite>feat_imp_mode=’permutation’</cite>. Default: 5.</p></li>
+<li><p><strong>perm_crit</strong> (<cite>str</cite>, optional) – <p>Criterio per aggregare i punteggi delle ripetizioni di Permutation Importance. Opzioni:</p>
+<ul>
+<li><p>’mean’</p></li>
+<li><p>’max’</p></li>
+<li><p>’min’.</p></li>
+</ul>
+<p>Usato solo se <cite>feat_imp_mode=’permutation’</cite>. Default: ‘mean’.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>Un dizionario contenente i risultati dell’analisi. Contiene:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Il tipo di importanza usata (shap, gini o coef)</p></li>
+<li><p>Un dizionario contenente le feature con il loro score di importanza</p></li>
+<li><p>Lo score del modello (se il metodo <cite>get_score</cite> è stato chiamato)</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>dict</cite></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>È necessario aver eseguito il metodo <cite>fit</cite> con successo prima di chiamare questa funzione.</p></li>
+<li><p>Se è stato applicato One-Hot Encoding (nel metodo <cite>fit</cite> con il parametro <cite>categorical_ohe=True</cite>), l’importanza delle feature OHE derivate viene sommata per creare un unico valore attribuito alla feature categorica originale.</p></li>
+<li><p>I punteggi di importanza (‘gini’, ‘permutation’, ‘shap’, ‘coef’) vengono normalizzati per somma a 1.</p></li>
+<li><p>La velocità del calcolo dei valori SHAP è veloce quando <cite>shap_type=tree</cite>. Per <cite>shap_type=kernel</cite> e <cite>shap_type=deep</cite> il calcolo è potenzialmente lento, specialmente con molti dati e richiedono un subset di dati di background.</p></li>
+</ul>
+</div>
+<p><strong>Dati utilizzati per gli esempi:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_esempio</span>
+</pre></div>
+</div>
+<style>
+   /* Stile base per la tabella con la nostra classe specifica */
+   .jupyter-style-table {
+       border-collapse: collapse; /* Bordi uniti */
+       margin: 1em 0; /* Margine sopra/sotto */
+       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Font simile a Jupyter */
+       font-size: 0.9em; /* Dimensione font leggermente ridotta */
+       border: 1px solid #d3d3d3; /* Bordo esterno leggero */
+       width: auto; /* Larghezza basata sul contenuto */
+       max-width: 100%; /* Non superare il contenitore */
+       overflow-x: auto; /* Abilita lo scroll orizzontale se necessario (meglio sul wrapper, ma ok qui) */
+       display: block; /* Necessario per far funzionare overflow-x su una tabella */
+   }
+
+   /* Stile per le celle dell'header (th) */
+   .jupyter-style-table thead th {
+       background-color: #f5f5f5; /* Sfondo grigio chiaro per header */
+       font-weight: bold; /* Grassetto */
+       padding: 8px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (spesso a destra per numeri/default) */
+       border-bottom: 1px solid #d3d3d3; /* Linea sotto l'header */
+       vertical-align: bottom; /* Allineamento verticale */
+   }
+
+   /* Stile per le celle dei dati (td) */
+   .jupyter-style-table tbody td {
+       padding: 6px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (aggiusta se hai testo a sinistra) */
+       border-right: 1px solid #d3d3d3; /* Linea verticale tra celle (opzionale) */
+       border-top: 1px solid #d3d3d3; /* Linea orizzontale tra righe */
+       vertical-align: middle; /* Allineamento verticale */
+   }
+   .jupyter-style-table tbody td:last-child {
+       border-right: none; /* Rimuovi bordo destro sull'ultima cella */
+   }
+
+   /* Stile per l'header dell'indice (se presente) */
+   .jupyter-style-table thead th.blank { /* Header vuoto sopra l'indice */
+       background-color: white;
+       border: none;
+   }
+   .jupyter-style-table tbody th { /* Celle dell'indice nel body */
+       padding: 6px 10px;
+       text-align: right;
+       font-weight: normal;
+       border-right: 1px solid #d3d3d3;
+       border-top: 1px solid #d3d3d3;
+       background-color: #f5f5f5; /* Sfondo leggero per indice */
+   }
+
+
+   /* Striping delle righe (alternanza colori) */
+   .jupyter-style-table tbody tr:nth-child(even) {
+       background-color: #f9f9f9; /* Sfondo molto leggero per righe pari */
+   }
+
+   /* Effetto Hover (cambio colore al passaggio del mouse) */
+   .jupyter-style-table tbody tr:hover {
+       background-color: #f0f0f0; /* Sfondo leggermente più scuro su hover */
+   }
+</style>
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>feature_num</th>      <th>feature_cat</th>      <th>pred_clf</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>1</td>      <td>A</td>      <td>0</td>    </tr>    <tr>      <th>1</th>      <td>3</td>      <td>B</td>      <td>1</td>    </tr>    <tr>      <th>2</th>      <td>1</td>      <td>A</td>      <td>0</td>    </tr>    <tr>      <th>3</th>      <td>1</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>4</th>      <td>1</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>5</th>      <td>3</td>      <td>A</td>      <td>1</td>    </tr>    <tr>      <th>6</th>      <td>1</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>7</th>      <td>1</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>8</th>      <td>1</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>9</th>      <td>3</td>      <td>A</td>      <td>1</td>    </tr>  </tbody></table><p><strong>Esempio:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modelLR</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">model_monitoring.XAI</span><span class="w"> </span><span class="kn">import</span> <span class="n">XAI</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Xai</span> <span class="o">=</span> <span class="n">XAI</span><span class="p">(</span><span class="n">model_input</span><span class="o">=</span><span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">modelLR</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Xai</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_esempio</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pred_clf&#39;</span><span class="p">]),</span><span class="n">df_esempio</span><span class="p">[</span><span class="s1">&#39;pred_clf&#39;</span><span class="p">],</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">importance</span><span class="o">=</span><span class="n">Xai</span><span class="o">.</span><span class="n">get_feature_importance</span><span class="p">(</span><span class="n">feat_imp_mode</span><span class="o">=</span><span class="s1">&#39;coef&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">importance</span>
+<span class="go">{&#39;type&#39;: &#39;coef&#39;,</span>
+<span class="go"> &#39;feat_importance&#39;: {&#39;feature_num&#39;: 0.8989692717116683,</span>
+<span class="go">  &#39;feature_cat&#39;: 0.1010307282883317}}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">XAI.get_feature_importance</a><ul>
+<li><a class="reference internal" href="#model_monitoring.XAI.XAI.get_feature_importance"><code class="docutils literal notranslate"><span class="pre">XAI.get_feature_importance()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI.XAI.fit.html"
+                          title="previous chapter">XAI.fit</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI.XAI.get_report.html"
+                          title="next chapter">XAI.get_report</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.XAI/model_monitoring.XAI.XAI.get_feature_importance.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.get_report.html" title="XAI.get_report"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.fit.html" title="XAI.fit"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI.html" >XAI</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.XAI.XAI.html" >XAI</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAI.get_feature_importance</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

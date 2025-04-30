@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>DataDrift.report_drift &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="fairness_drift" href="../model_monitoring.fairness_drift.html" />
+    <link rel="prev" title="DataDrift.get_meta_ref" href="model_monitoring.data_drift.DataDrift.get_meta_ref.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.fairness_drift.html" title="fairness_drift"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.data_drift.DataDrift.get_meta_ref.html" title="DataDrift.get_meta_ref"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.data_drift.html" >data_drift</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.data_drift.DataDrift.html" accesskey="U">DataDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">DataDrift.report_drift</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="datadrift-report-drift">
+<h1>DataDrift.report_drift<a class="headerlink" href="#datadrift-report-drift" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.data_drift.DataDrift.report_drift">
+<span class="sig-prename descclassname"><span class="pre">DataDrift.</span></span><span class="sig-name descname"><span class="pre">report_drift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psi_nbins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psi_bin_min_pct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.04</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'psi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_meta_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.data_drift.DataDrift.report_drift" title="Link to this definition">¶</a></dt>
+<dd><p>Restituisce il report con PSI o p-value per ciascuna feature in entrambi i dataset (storico e corrente) e segnala avvisi (<cite>Warning</cite>) se i PSI superano le soglie predefinite o se i p-value non superano il livello di significatività (alpha).</p>
+<p>Questa funzione calcola il report del drift dei dati confrontando il dataset storico (di riferimento) con il dataset corrente. Il data drift viene calcolato utilizzando il Population Stability Index (PSI) o i p-value, a seconda del valore del parametro <cite>stat</cite>. Se il PSI supera la soglia predefinita o se il p-value non supera il livello di significatività (alpha), vengono generati degli avvisi.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>psi_nbins</strong> (<cite>int</cite>, opzionale) – Numero di intervalli (bins) in cui le feature verranno suddivise per il calcolo del PSI. Default: 1000.</p></li>
+<li><p><strong>psi_bin_min_pct</strong> (<cite>float</cite>, opzionale) – Percentuale minima di osservazioni per ciascun intervallo (bucket). Default: 0.04 (4%).</p></li>
+<li><p><strong>stat</strong> (<cite>str</cite>, opzionale) – Tipo di statistica da utilizzare. Può essere “psi” (Population Stability Index) o “pval” (p-value derivato dal test di Kolmogorov-Smirnov per feature numeriche o dal test del Chi-quadrato per feature categoriche). Default: “psi”.</p></li>
+<li><p><strong>drift_missing</strong> (<cite>bool</cite>, opzionale) – Se True, include nel report anche il drift dei valori mancanti (missing values). Default: True.</p></li>
+<li><p><strong>return_meta_ref</strong> (<cite>bool</cite>, opzionale) – Se True, salva il dizionario dei metadati di riferimento come attributo della classe. Default: False.</p></li>
+<li><p><strong>dim_threshold</strong> (<cite>int</cite>, opzionale) – Dimensione massima del set di test significativo per il test del Chi-quadrato. Default: 5000.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Il report generato dalla classe che contiene le informazioni sul data drift delle feature. Il <cite>DataFrame</cite> include il valore del PSI o del p-value per ciascuna feature, eventuali avvisi e, se richiesto, anche le informazioni sul drift dei valori mancanti.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>pd.DataFrame</cite></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Se il parametro <cite>stat</cite> è impostato su “psi”, la funzione calcolerà il PSI per le feature numeriche e categoriche.</p></li>
+<li><p>Se il parametro <cite>stat</cite> è impostato su “pval”, la funzione eseguirà il test di Kolmogorov-Smirnov per le feature numeriche e il test del Chi-quadrato per quelle categoriche.</p></li>
+<li><p>Gli avvisi sono generati se i PSI superano la soglia massima predefinita o se i p-value non superano il livello di significatività (alpha).</p></li>
+</ul>
+</div>
+<p><strong>Esempio 1: Utilizzo con DataFrame Pandas</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">model_monitoring.data_drift</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataDrift</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_storico</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">... </span> <span class="s1">&#39;feature_num&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="gp">... </span> <span class="s1">&#39;feature_cat&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+<span class="gp">... </span> <span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_corrente</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">... </span> <span class="s1">&#39;feature_num&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="c1"># Leggero shift</span>
+<span class="gp">... </span> <span class="s1">&#39;feature_cat&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span> <span class="c1"># Distribuzione diversa</span>
+<span class="gp">... </span> <span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drift_detector</span> <span class="o">=</span> <span class="n">DataDrift</span><span class="p">(</span><span class="n">data_storico</span><span class="p">,</span> <span class="n">data_corrente</span><span class="p">,</span> <span class="n">type_data</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">drift_detector</span><span class="o">.</span><span class="n">report_drift</span><span class="p">(</span><span class="n">stat</span><span class="o">=</span><span class="s2">&quot;psi&quot;</span><span class="p">,</span> <span class="n">drift_missing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span>
+</pre></div>
+</div>
+<style>
+   /* Stile base per la tabella con la nostra classe specifica */
+   .jupyter-style-table {
+       border-collapse: collapse; /* Bordi uniti */
+       margin: 1em 0; /* Margine sopra/sotto */
+       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Font simile a Jupyter */
+       font-size: 0.9em; /* Dimensione font leggermente ridotta */
+       border: 1px solid #d3d3d3; /* Bordo esterno leggero */
+       width: auto; /* Larghezza basata sul contenuto */
+       max-width: 100%; /* Non superare il contenitore */
+       overflow-x: auto; /* Abilita lo scroll orizzontale se necessario (meglio sul wrapper, ma ok qui) */
+       display: block; /* Necessario per far funzionare overflow-x su una tabella */
+   }
+
+   /* Stile per le celle dell'header (th) */
+   .jupyter-style-table thead th {
+       background-color: #f5f5f5; /* Sfondo grigio chiaro per header */
+       font-weight: bold; /* Grassetto */
+       padding: 8px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (spesso a destra per numeri/default) */
+       border-bottom: 1px solid #d3d3d3; /* Linea sotto l'header */
+       vertical-align: bottom; /* Allineamento verticale */
+   }
+
+   /* Stile per le celle dei dati (td) */
+   .jupyter-style-table tbody td {
+       padding: 6px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (aggiusta se hai testo a sinistra) */
+       border-right: 1px solid #d3d3d3; /* Linea verticale tra celle (opzionale) */
+       border-top: 1px solid #d3d3d3; /* Linea orizzontale tra righe */
+       vertical-align: middle; /* Allineamento verticale */
+   }
+   .jupyter-style-table tbody td:last-child {
+       border-right: none; /* Rimuovi bordo destro sull'ultima cella */
+   }
+
+   /* Stile per l'header dell'indice (se presente) */
+   .jupyter-style-table thead th.blank { /* Header vuoto sopra l'indice */
+       background-color: white;
+       border: none;
+   }
+   .jupyter-style-table tbody th { /* Celle dell'indice nel body */
+       padding: 6px 10px;
+       text-align: right;
+       font-weight: normal;
+       border-right: 1px solid #d3d3d3;
+       border-top: 1px solid #d3d3d3;
+       background-color: #f5f5f5; /* Sfondo leggero per indice */
+   }
+
+
+   /* Striping delle righe (alternanza colori) */
+   .jupyter-style-table tbody tr:nth-child(even) {
+       background-color: #f9f9f9; /* Sfondo molto leggero per righe pari */
+   }
+
+   /* Effetto Hover (cambio colore al passaggio del mouse) */
+   .jupyter-style-table tbody tr:hover {
+       background-color: #f0f0f0; /* Sfondo leggermente più scuro su hover */
+   }
+</style>
+
+    <table class="jupyter-style-table" border="0">
+        <thead>
+            <tr style="text-align: right;">
+              <th>feature</th>
+              <th>common_psi</th>
+              <th>warning</th>
+              <th>total_psi</th>
+              <th>proportion_new_data</th>
+              <th>proportion_old-fashioned_data</th>
+              <th>validity_warning</th>
+              <th>drift_perc_missing</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>feature_cat</td>
+              <td>0.069315</td>
+              <td>None</td>
+              <td>2.510517</td>
+              <td>0.2</td>
+              <td>0.0</td>
+              <td>Red Alert - new categorical data</td>
+              <td>0.0</td>
+            </tr>
+            <tr>
+              <td>feature_num</td>
+              <td>1.220596</td>
+              <td>Red Alert</td>
+              <td>1.220596</td>
+              <td>0.0</td>
+              <td>0.0</td>
+              <td>Information - values above the upper bound in the new data</td>
+              <td>0.0</td>
+            </tr>
+            </tbody>
+        </table><p><strong>Esempio 2: Utilizzo con Metadati (struttura semplificata)</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">meta_storico</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">    &#39;feature_num&#39;: {&#39;type&#39;: &#39;numerical&#39;,</span>
+<span class="go">      &#39;min_val&#39;: 1,</span>
+<span class="go">      &#39;max_val&#39;: 10,</span>
+<span class="go">      &#39;not_missing_values&#39;: 10,</span>
+<span class="go">      &#39;bin_0&#39;: {&#39;min&#39;: -inf, &#39;max&#39;: 1.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_1&#39;: {&#39;min&#39;: 1.0, &#39;max&#39;: 2.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_2&#39;: {&#39;min&#39;: 2.0, &#39;max&#39;: 3.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_3&#39;: {&#39;min&#39;: 3.0, &#39;max&#39;: 4.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_4&#39;: {&#39;min&#39;: 4.0, &#39;max&#39;: 5.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_5&#39;: {&#39;min&#39;: 5.0, &#39;max&#39;: 6.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_6&#39;: {&#39;min&#39;: 6.0, &#39;max&#39;: 7.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_7&#39;: {&#39;min&#39;: 7.0, &#39;max&#39;: 8.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_8&#39;: {&#39;min&#39;: 8.0, &#39;max&#39;: 9.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_9&#39;: {&#39;min&#39;: 9.0, &#39;max&#39;: inf, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;missing_values&#39;: 0.0},</span>
+<span class="go">    &#39;feature_cat&#39;: {&#39;type&#39;: &#39;categorical&#39;,</span>
+<span class="go">      &#39;not_missing_values&#39;: 10,</span>
+<span class="go">      &#39;A&#39;: {&#39;labels&#39;: [&#39;A&#39;], &#39;freq&#39;: 0.4},</span>
+<span class="go">      &#39;B&#39;: {&#39;labels&#39;: [&#39;B&#39;], &#39;freq&#39;: 0.3},</span>
+<span class="go">      &#39;C&#39;: {&#39;labels&#39;: [&#39;C&#39;], &#39;freq&#39;: 0.3},</span>
+<span class="go">      &#39;missing_values&#39;: 0.0}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meta_corrente</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">    &#39;feature_cat&#39;: {&#39;type&#39;: &#39;categorical&#39;,</span>
+<span class="go">      &#39;A&#39;: {&#39;labels&#39;: [&#39;A&#39;], &#39;freq&#39;: 0.3},</span>
+<span class="go">      &#39;B&#39;: {&#39;labels&#39;: [&#39;B&#39;], &#39;freq&#39;: 0.2},</span>
+<span class="go">      &#39;C&#39;: {&#39;labels&#39;: [&#39;C&#39;], &#39;freq&#39;: 0.3},</span>
+<span class="go">      &#39;_other_&#39;: {&#39;labels&#39;: [&#39;D&#39;, &#39;E&#39;], &#39;freq&#39;: 0.2},</span>
+<span class="go">      &#39;missing_values&#39;: 0.0,</span>
+<span class="go">      &#39;not_missing_values&#39;: 10},</span>
+<span class="go">     &#39;feature_num&#39;: {&#39;type&#39;: &#39;numerical&#39;,</span>
+<span class="go">      &#39;min_val&#39;: 2,</span>
+<span class="go">      &#39;max_val&#39;: 11,</span>
+<span class="go">      &#39;bin_0&#39;: {&#39;min&#39;: -inf, &#39;max&#39;: 1.0, &#39;freq&#39;: 0.0},</span>
+<span class="go">      &#39;bin_1&#39;: {&#39;min&#39;: 1.0, &#39;max&#39;: 2.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_2&#39;: {&#39;min&#39;: 2.0, &#39;max&#39;: 3.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_3&#39;: {&#39;min&#39;: 3.0, &#39;max&#39;: 4.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_4&#39;: {&#39;min&#39;: 4.0, &#39;max&#39;: 5.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_5&#39;: {&#39;min&#39;: 5.0, &#39;max&#39;: 6.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_6&#39;: {&#39;min&#39;: 6.0, &#39;max&#39;: 7.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_7&#39;: {&#39;min&#39;: 7.0, &#39;max&#39;: 8.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_8&#39;: {&#39;min&#39;: 8.0, &#39;max&#39;: 9.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">      &#39;bin_9&#39;: {&#39;min&#39;: 9.0, &#39;max&#39;: inf, &#39;freq&#39;: 0.2},</span>
+<span class="go">      &#39;missing_values&#39;: 0.0,</span>
+<span class="go">      &#39;not_missing_values&#39;: 10}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drift_detector_meta</span> <span class="o">=</span> <span class="n">DataDrift</span><span class="p">(</span><span class="n">meta_storico</span><span class="p">,</span> <span class="n">meta_corrente</span><span class="p">,</span> <span class="n">type_data</span><span class="o">=</span><span class="s2">&quot;metadata&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report_meta</span> <span class="o">=</span> <span class="n">drift_detector_meta</span><span class="o">.</span><span class="n">report_drift</span><span class="p">(</span><span class="n">stat</span><span class="o">=</span><span class="s2">&quot;psi&quot;</span><span class="p">,</span> <span class="n">drift_missing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report_meta</span>
+</pre></div>
+</div>
+<table class="jupyter-style-table" border="0">
+        <thead>
+            <tr style="text-align: right;">
+              <th>feature</th>
+              <th>common_psi</th>
+              <th>warning</th>
+              <th>total_psi</th>
+              <th>proportion_new_data</th>
+              <th>proportion_old-fashioned_data</th>
+              <th>validity_warning</th>
+              <th>drift_perc_missing</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>feature_cat</td>
+              <td>0.069315</td>
+              <td>None</td>
+              <td>2.510517</td>
+              <td>0.2</td>
+              <td>0.0</td>
+              <td>Red Alert - new categorical data</td>
+              <td>0.0</td>
+            </tr>
+            <tr>
+              <td>feature_num</td>
+              <td>1.220596</td>
+              <td>Red Alert</td>
+              <td>1.220596</td>
+              <td>0.0</td>
+              <td>0.0</td>
+              <td>Information - values above the upper bound in the new data</td>
+              <td>0.0</td>
+            </tr>
+            </tbody>
+        </table></dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">DataDrift.report_drift</a><ul>
+<li><a class="reference internal" href="#model_monitoring.data_drift.DataDrift.report_drift"><code class="docutils literal notranslate"><span class="pre">DataDrift.report_drift()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.data_drift.DataDrift.get_meta_ref.html"
+                          title="previous chapter">DataDrift.get_meta_ref</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../model_monitoring.fairness_drift.html"
+                          title="next chapter">fairness_drift</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.data_drift/model_monitoring.data_drift.DataDrift.report_drift.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.fairness_drift.html" title="fairness_drift"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.data_drift.DataDrift.get_meta_ref.html" title="DataDrift.get_meta_ref"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.data_drift.html" >data_drift</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.data_drift.DataDrift.html" >DataDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">DataDrift.report_drift</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

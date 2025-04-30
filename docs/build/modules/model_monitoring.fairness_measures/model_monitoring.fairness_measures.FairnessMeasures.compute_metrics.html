@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>FairnessMeasures.compute_metrics &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="model_performance" href="../model_monitoring.model_performance.html" />
+    <link rel="prev" title="FairnessMeasures.__init__" href="model_monitoring.fairness_measures.FairnessMeasures.__init__.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.model_performance.html" title="model_performance"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_measures.FairnessMeasures.__init__.html" title="FairnessMeasures.__init__"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.fairness_measures.html" >fairness_measures</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.fairness_measures.FairnessMeasures.html" accesskey="U">FairnessMeasures</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FairnessMeasures.compute_metrics</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="fairnessmeasures-compute-metrics">
+<h1>FairnessMeasures.compute_metrics<a class="headerlink" href="#fairnessmeasures-compute-metrics" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.fairness_measures.FairnessMeasures.compute_metrics">
+<span class="sig-prename descclassname"><span class="pre">FairnessMeasures.</span></span><span class="sig-name descname"><span class="pre">compute_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_fair</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fair_feat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_prop_true</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.fairness_measures.FairnessMeasures.compute_metrics" title="Link to this definition">¶</a></dt>
+<dd><p>Calcola le metriche di fairness basandosi sulle metriche di fairness impostate sui gruppi di fairness specificati.</p>
+<p>Questo metodo supporta sia modelli supervisionati che non supervisionati.</p>
+<p>Il metodo esegue il calcolo delle metriche di fairness per ciascun gruppo di fairness specificato e può restituire le proporzioni di 1 nel contesto di classificazione binaria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predictions</strong> (<cite>np.array</cite>/<cite>pd.Series</cite>) – Le previsioni (o le etichette di cluster) generate dal modello.</p></li>
+<li><p><strong>X_fair</strong> (<cite>pd.DataFrame</cite>/<cite>pd.Series</cite>) – Il dataset da analizzare per le metriche di fairness, contenente le feature che determinano i gruppi di fairness.</p></li>
+<li><p><strong>target</strong> (<cite>np.array</cite>/<cite>pd.Series</cite>, opzionale) – La colonna target per il modello supervisionato. Necessaria solo se <cite>approach_type</cite> è “supervised”. Default: <cite>None</cite>.</p></li>
+<li><p><strong>fair_feat</strong> (<cite>str</cite>/<cite>list</cite>, opzionale) – Le feature da analizzare per il calcolo delle metriche di fairness. Se fornita una lista di liste di feature vengono analizzate tutte le combinazioni possibili dei valori di quelle feature per il calcolo delle metriche. Se non fornito, tutte le feature di <cite>X_fair</cite> vengono analizzate. Default: <cite>None</cite>.</p></li>
+<li><p><strong>return_prop_true</strong> (<cite>bool</cite>, opzionale) – Se True, la funzione restituirà anche la proporzione di etichette di target che sono uguali a 1 in ciascun gruppo di fairness in un contesto di classificazione binaria. Default: <cite>True</cite>.</p></li>
+<li><p><strong>**kwargs</strong> (<cite>dict</cite>, opzionale) – Altri parametri opzionali da passare alla funzione, che possono includere le configurazioni personalizzate per il calcolo delle metriche.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Un dizionario contenente le metriche di fairness calcolate per ciascun gruppo di fairness. Ogni chiave è una metrica, e ogni valore è un altro dizionario che contiene le performance per ciascun gruppo.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>dict</cite></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Il dizionario ritornato dal metodo contiene per ogni gruppo di fairness, oltre al valore della metrica, anche la percentuale di campioni appartenenti al gruppo rispetto al numero totale di campioni.</p></li>
+<li><p>Se <cite>return_prop_true</cite> è <cite>True</cite> il dizionario ritornato conterrà anche la percentuale di 1 (veri positivi) all’interno del gruppo in un contesto di classificazione binaria.</p></li>
+</ul>
+</div>
+<p><strong>Dati utilizzati per gli esempi</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_esempio</span>
+</pre></div>
+</div>
+<style>
+   /* Stile base per la tabella con la nostra classe specifica */
+   .jupyter-style-table {
+       border-collapse: collapse; /* Bordi uniti */
+       margin: 1em 0; /* Margine sopra/sotto */
+       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Font simile a Jupyter */
+       font-size: 0.9em; /* Dimensione font leggermente ridotta */
+       border: 1px solid #d3d3d3; /* Bordo esterno leggero */
+       width: auto; /* Larghezza basata sul contenuto */
+       max-width: 100%; /* Non superare il contenitore */
+       overflow-x: auto; /* Abilita lo scroll orizzontale se necessario (meglio sul wrapper, ma ok qui) */
+       display: block; /* Necessario per far funzionare overflow-x su una tabella */
+   }
+
+   /* Stile per le celle dell'header (th) */
+   .jupyter-style-table thead th {
+       background-color: #f5f5f5; /* Sfondo grigio chiaro per header */
+       font-weight: bold; /* Grassetto */
+       padding: 8px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (spesso a destra per numeri/default) */
+       border-bottom: 1px solid #d3d3d3; /* Linea sotto l'header */
+       vertical-align: bottom; /* Allineamento verticale */
+   }
+
+   /* Stile per le celle dei dati (td) */
+   .jupyter-style-table tbody td {
+       padding: 6px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (aggiusta se hai testo a sinistra) */
+       border-right: 1px solid #d3d3d3; /* Linea verticale tra celle (opzionale) */
+       border-top: 1px solid #d3d3d3; /* Linea orizzontale tra righe */
+       vertical-align: middle; /* Allineamento verticale */
+   }
+   .jupyter-style-table tbody td:last-child {
+       border-right: none; /* Rimuovi bordo destro sull'ultima cella */
+   }
+
+   /* Stile per l'header dell'indice (se presente) */
+   .jupyter-style-table thead th.blank { /* Header vuoto sopra l'indice */
+       background-color: white;
+       border: none;
+   }
+   .jupyter-style-table tbody th { /* Celle dell'indice nel body */
+       padding: 6px 10px;
+       text-align: right;
+       font-weight: normal;
+       border-right: 1px solid #d3d3d3;
+       border-top: 1px solid #d3d3d3;
+       background-color: #f5f5f5; /* Sfondo leggero per indice */
+   }
+
+
+   /* Striping delle righe (alternanza colori) */
+   .jupyter-style-table tbody tr:nth-child(even) {
+       background-color: #f9f9f9; /* Sfondo molto leggero per righe pari */
+   }
+
+   /* Effetto Hover (cambio colore al passaggio del mouse) */
+   .jupyter-style-table tbody tr:hover {
+       background-color: #f0f0f0; /* Sfondo leggermente più scuro su hover */
+   }
+</style>
+
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>feature_num</th>      <th>feature_cat</th>      <th>target_clf</th>      <th>pred_clf</th>      <th>target_reg</th>      <th>pred_reg</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>2</td>      <td>B</td>      <td>0</td>      <td>0</td>      <td>7.652628</td>      <td>-1.427613</td>    </tr>    <tr>      <th>1</th>      <td>3</td>      <td>A</td>      <td>1</td>      <td>0</td>      <td>17.712800</td>      <td>3.589763</td>    </tr>    <tr>      <th>2</th>      <td>4</td>      <td>C</td>      <td>0</td>      <td>0</td>      <td>17.682912</td>      <td>32.339399</td>    </tr>    <tr>      <th>3</th>      <td>5</td>      <td>B</td>      <td>0</td>      <td>0</td>      <td>22.671351</td>      <td>20.413588</td>    </tr>    <tr>      <th>4</th>      <td>6</td>      <td>A</td>      <td>0</td>      <td>1</td>      <td>31.209811</td>      <td>31.885093</td>    </tr>    <tr>      <th>5</th>      <td>7</td>      <td>C</td>      <td>1</td>      <td>0</td>      <td>25.433599</td>      <td>11.186117</td>    </tr>    <tr>      <th>6</th>      <td>8</td>      <td>D</td>      <td>0</td>      <td>1</td>      <td>31.375411</td>      <td>25.931584</td>    </tr>    <tr>      <th>7</th>      <td>9</td>      <td>E</td>      <td>0</td>      <td>1</td>      <td>42.188562</td>      <td>43.297788</td>    </tr>    <tr>      <th>8</th>      <td>10</td>      <td>C</td>      <td>0</td>      <td>1</td>      <td>44.935844</td>      <td>33.425909</td>    </tr>    <tr>      <th>9</th>      <td>11</td>      <td>A</td>      <td>1</td>      <td>0</td>      <td>56.571237</td>      <td>60.328217</td>    </tr>  </tbody></table><p><strong>Esempio 1: Utilizzo con Classificazione</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">model_monitoring.fairness_measures</span><span class="w"> </span><span class="kn">import</span> <span class="n">FairnessMeasures</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prova_clf</span> <span class="o">=</span> <span class="n">FairnessMeasures</span><span class="p">(</span><span class="n">approach_type</span><span class="o">=</span><span class="s2">&quot;supervised&quot;</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fair_dict_clf</span> <span class="o">=</span> <span class="n">prova_clf</span><span class="o">.</span><span class="n">compute_metrics</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">df_esempio</span><span class="o">.</span><span class="n">pred_clf</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">df_esempio</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="n">df_esempio</span><span class="o">.</span><span class="n">target_clf</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">fair_feat</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;feature_cat&#39;</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fair_dict_clf</span>
+<span class="go">{&#39;statistical_parity_difference&#39;: {&#39;feature_cat&#39;: {&#39;B&#39;: [-0.5, 0.2, 0.0],</span>
+<span class="go">   &#39;A&#39;: [-0.09523809523809523, 0.3, 0.6666666666666666],</span>
+<span class="go">   &#39;C&#39;: [-0.09523809523809523, 0.3, 0.3333333333333333],</span>
+<span class="go">   &#39;D&#39;: [0.6666666666666667, 0.1, 0.0],</span>
+<span class="go">   &#39;E&#39;: [0.6666666666666667, 0.1, 0.0]}},</span>
+<span class="go"> &#39;disparate_impact_ratio&#39;: {&#39;feature_cat&#39;: {&#39;B&#39;: [0.0, 0.2, 0.0],</span>
+<span class="go">   &#39;A&#39;: [0.7777777777777778, 0.3, 0.6666666666666666],</span>
+<span class="go">   &#39;C&#39;: [0.7777777777777778, 0.3, 0.3333333333333333],</span>
+<span class="go">   &#39;D&#39;: [3.0, 0.1, 0.0],</span>
+<span class="go">   &#39;E&#39;: [3.0, 0.1, 0.0]}},</span>
+<span class="go"> &#39;predictive_parity_difference&#39;: {&#39;feature_cat&#39;: {&#39;B&#39;: [0.0, 0.2, 0.0],</span>
+<span class="go">   &#39;A&#39;: [0.0, 0.3, 0.6666666666666666],</span>
+<span class="go">   &#39;C&#39;: [0.0, 0.3, 0.3333333333333333],</span>
+<span class="go">   &#39;D&#39;: [0.0, 0.1, 0.0],</span>
+<span class="go">   &#39;E&#39;: [0.0, 0.1, 0.0]}},</span>
+<span class="go"> &#39;equal_opportunity_difference&#39;: {&#39;feature_cat&#39;: {&#39;B&#39;: [0.0, 0.2, 0.0],</span>
+<span class="go">   &#39;A&#39;: [0.0, 0.3, 0.6666666666666666],</span>
+<span class="go">   &#39;C&#39;: [0.0, 0.3, 0.3333333333333333],</span>
+<span class="go">   &#39;D&#39;: [0.0, 0.1, 0.0],</span>
+<span class="go">   &#39;E&#39;: [0.0, 0.1, 0.0]}},</span>
+<span class="go"> &#39;average_odds_difference&#39;: {&#39;feature_cat&#39;: {&#39;B&#39;: [-0.4, 0.2, 0.0],</span>
+<span class="go">   &#39;A&#39;: [0.25, 0.3, 0.6666666666666666],</span>
+<span class="go">   &#39;C&#39;: [-0.04999999999999999, 0.3, 0.3333333333333333],</span>
+<span class="go">   &#39;D&#39;: [0.25, 0.1, 0.0],</span>
+<span class="go">   &#39;E&#39;: [0.25, 0.1, 0.0]}}}</span>
+</pre></div>
+</div>
+<p><strong>Esempio 2: Utilizzo con Regressione</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">model_monitoring.fairness_measures</span><span class="w"> </span><span class="kn">import</span> <span class="n">FairnessMeasures</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prova_reg</span> <span class="o">=</span> <span class="n">FairnessMeasures</span><span class="p">(</span><span class="n">approach_type</span><span class="o">=</span><span class="s2">&quot;supervised&quot;</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;regression&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fair_dict_reg</span> <span class="o">=</span> <span class="n">prova_reg</span><span class="o">.</span><span class="n">compute_metrics</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="n">df_esempio</span><span class="o">.</span><span class="n">pred_reg</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">df_esempio</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">target</span><span class="o">=</span><span class="n">df_esempio</span><span class="o">.</span><span class="n">target_reg</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">fair_feat</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;feature_cat&#39;</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fair_dict_reg</span>
+<span class="go">{&#39;ddre_independence&#39;: {&#39;feature_cat&#39;: {&#39;B&#39;: [1.105141780859906, 0.2],</span>
+<span class="go">   &#39;A&#39;: [1.0305683337638512, 0.3],</span>
+<span class="go">   &#39;C&#39;: [1.0001623180326842, 0.3],</span>
+<span class="go">   &#39;D&#39;: [0.9999460741465931, 0.1],</span>
+<span class="go">   &#39;E&#39;: [1.0262780528726796, 0.1]}},</span>
+<span class="go"> &#39;ddre_separation&#39;: {&#39;feature_cat&#39;: {&#39;B&#39;: [0.9314966649516162, 0.2],</span>
+<span class="go">   &#39;A&#39;: [0.9962910535987769, 0.3],</span>
+<span class="go">   &#39;C&#39;: [0.9999808022130929, 0.3],</span>
+<span class="go">   &#39;D&#39;: [1.0007959938045, 0.1],</span>
+<span class="go">   &#39;E&#39;: [0.9474475048436408, 0.1]}},</span>
+<span class="go"> &#39;ddre_sufficiency&#39;: {&#39;feature_cat&#39;: {&#39;B&#39;: [0.9319339519285806, 0.2],</span>
+<span class="go">   &#39;A&#39;: [0.998310923429683, 0.3],</span>
+<span class="go">   &#39;C&#39;: [0.9999865564552243, 0.3],</span>
+<span class="go">   &#39;D&#39;: [1.0004274343644692, 0.1],</span>
+<span class="go">   &#39;E&#39;: [0.9516507505311746, 0.1]}}}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">FairnessMeasures.compute_metrics</a><ul>
+<li><a class="reference internal" href="#model_monitoring.fairness_measures.FairnessMeasures.compute_metrics"><code class="docutils literal notranslate"><span class="pre">FairnessMeasures.compute_metrics()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.fairness_measures.FairnessMeasures.__init__.html"
+                          title="previous chapter">FairnessMeasures.__init__</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../model_monitoring.model_performance.html"
+                          title="next chapter">model_performance</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.fairness_measures/model_monitoring.fairness_measures.FairnessMeasures.compute_metrics.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.model_performance.html" title="model_performance"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_measures.FairnessMeasures.__init__.html" title="FairnessMeasures.__init__"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.fairness_measures.html" >fairness_measures</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.fairness_measures.FairnessMeasures.html" >FairnessMeasures</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FairnessMeasures.compute_metrics</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

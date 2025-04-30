@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>XAI.__init__ &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="XAI.fit" href="model_monitoring.XAI.XAI.fit.html" />
+    <link rel="prev" title="XAI" href="model_monitoring.XAI.XAI.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.fit.html" title="XAI.fit"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.html" title="XAI"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI.html" >XAI</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.XAI.XAI.html" accesskey="U">XAI</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAI.__init__</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="xai-init">
+<h1>XAI.__init__<a class="headerlink" href="#xai-init" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.XAI.XAI.__init__">
+<span class="sig-prename descclassname"><span class="pre">XAI.</span></span><span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">approach_type='supervised'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_input='default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_cv=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv_funct=&lt;class</span> <span class="pre">'sklearn.model_selection._search.RandomizedSearchCV'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv_scoring='auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter=40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv_type=StratifiedKFold(n_splits=5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state=42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle=True)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algo_type='auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_cat_threshold=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.XAI.XAI.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Inizializza l’oggetto XAI configurando il modello e le opzioni di addestramento/interpretazione.</p>
+<p>Imposta i parametri per definire l’approccio (supervisionato/non supervisionato), il tipo di modello da usare (default LGBM o custom), se usare la cross-validation per l’ottimizzazione degli iperparametri, e come gestire le feature categoriche.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>approach_type</strong> (<cite>str</cite>) – <p>Tipo di approccio per l’analisi della spiegabilità del modello. Può essere:</p>
+<ul>
+<li><p><strong>”supervised”</strong> (default): Approccio supervisionato.</p></li>
+<li><p><strong>”unsupervised”</strong>: Approccio non supervisionato, generalmente utilizzato per il clustering.</p></li>
+</ul>
+<p>Default: ‘supervised’</p>
+</p></li>
+<li><p><strong>model_input</strong> (<cite>str</cite>, optional) – <p>Specifica l’origine del modello:</p>
+<ul>
+<li><p>’default’: Utilizza un modello LightGBM interno (LGBMClassifier o LGBMRegressor in base a <cite>algo_type</cite>).</p></li>
+<li><p>’custom’: Utilizza il modello fornito nell’argomento <cite>model</cite>.</p></li>
+</ul>
+<p>Default: ‘default’.</p>
+</p></li>
+<li><p><strong>model</strong> (<cite>object</cite>/<cite>None</cite>, optional) – Un modello (classificatore o regressore). Utilizzato solo se <cite>model_input=’custom’</cite>. Default: <cite>None</cite>.</p></li>
+<li><p><strong>use_cv</strong> (<cite>bool</cite>, optional) – Se <cite>True</cite>, esegue la cross-validation (usando <cite>cv_funct</cite>, <cite>grid</cite>, <cite>cv_scoring</cite>, <cite>n_iter</cite>, <cite>cv_type</cite>) durante il metodo <cite>fit</cite> per ottimizzare gli iperparametri del modello. Default: <cite>False</cite>.</p></li>
+<li><p><strong>grid</strong> (<cite>dict</cite>/<cite>None</cite>, optional) – Dizionario della griglia degli iperparametri per la ricerca CV (es. per <cite>RandomizedSearchCV</cite>). Se <cite>None</cite> e si usa CV con <cite>model_input=’default’</cite>, viene usata una griglia predefinita per LGBM.
+Default: <cite>None</cite>.</p></li>
+<li><p><strong>cv_funct</strong> (<cite>class</cite>, optional) – La classe per la ricerca dei parametri tramite CV (es. <cite>RandomizedSearchCV</cite>, <cite>GridSearchCV</cite>). Default: <cite>RandomizedSearchCV</cite>.</p></li>
+<li><p><strong>cv_scoring</strong> (<cite>str</cite>, optional) – <p>La metrica di scoring da ottimizzare durante la CV. Se ‘auto’, seleziona automaticamente:</p>
+<ul>
+<li><p>’roc_auc’ per <cite>algo_type=’classification’</cite> (o clustering binario).</p></li>
+<li><p>’r2’ per <cite>algo_type=’regression’</cite>.</p></li>
+<li><p>’balanced_accuracy’ per <cite>algo_type=’multiclass’</cite> (o clustering multiclasse).</p></li>
+</ul>
+<p>Default: ‘auto’.</p>
+</p></li>
+<li><p><strong>n_iter</strong> (<cite>int</cite>, optional) – Numero di combinazioni di iperparametri da provare nella ricerca di essi. Default: 40.</p></li>
+<li><p><strong>cv_type</strong> (<cite>object</cite>, optional) – Un oggetto splitter per definire le suddivisioni della CV (es. <cite>StratifiedKFold</cite>, <cite>KFold</cite>, <cite>GroupKFold</cite>). Default: <cite>StratifiedKFold(5, random_state=42, shuffle=True)</cite>.</p></li>
+<li><p><strong>algo_type</strong> (<cite>str</cite>, optional) – <p>Il tipo di problema ML. Opzioni: ‘classification’, ‘multiclass’, ‘regression’, ‘clustering’, ‘auto’.</p>
+<ul>
+<li><p>Se ‘auto’ (per <cite>approach_type=’supervised’</cite>), il tipo viene determinato
+in <cite>fit</cite> in base al numero di valori unici in <cite>output_model</cite>.</p></li>
+<li><p>Deve essere ‘clustering’ per <cite>approach_type=’unsupervised’</cite>.</p></li>
+</ul>
+<p>Default: ‘auto’.</p>
+</p></li>
+<li><p><strong>dim_cat_threshold</strong> (<cite>int</cite>/<cite>None</cite>, optional) – Soglia di cardinalità per le feature categoriche quando <cite>model_input=’custom’</cite>. Se una feature categorica ha più valori unici di questa soglia, solo le top <cite>dim_cat_threshold</cite> categorie più frequenti vengono codificate con One-Hot Encoding (le altre vengono ignorate). Se <cite>None</cite>, viene applicato One-Hot Encoding standard a tutte le categorie. Ignorato se <cite>model_input=’default’</cite>. Default: <cite>None</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Il modello ‘default’ è LightGBM, che gestisce internamente le feature categoriche.</p></li>
+<li><p>Per <cite>model_input=’custom’</cite>, le feature categoriche vengono gestite tramite One-Hot Encoding (standard o Top-N basato su <cite>dim_cat_threshold</cite>) nel metodo <cite>fit</cite>.</p></li>
+<li><p>La configurazione della CV (Cross-Validation) viene utilizzata solo se <cite>use_cv=True</cite>.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">XAI.__init__</a><ul>
+<li><a class="reference internal" href="#model_monitoring.XAI.XAI.__init__"><code class="docutils literal notranslate"><span class="pre">XAI.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI.XAI.html"
+                          title="previous chapter">XAI</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI.XAI.fit.html"
+                          title="next chapter">XAI.fit</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.XAI/model_monitoring.XAI.XAI.__init__.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.fit.html" title="XAI.fit"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.html" title="XAI"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI.html" >XAI</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.XAI.XAI.html" >XAI</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAI.__init__</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

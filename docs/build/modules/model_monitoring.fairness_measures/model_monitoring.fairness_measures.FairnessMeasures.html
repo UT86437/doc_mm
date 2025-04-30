@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>FairnessMeasures &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="FairnessMeasures.__init__" href="model_monitoring.fairness_measures.FairnessMeasures.__init__.html" />
+    <link rel="prev" title="fairness_measures" href="../model_monitoring.fairness_measures.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_measures.FairnessMeasures.__init__.html" title="FairnessMeasures.__init__"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.fairness_measures.html" title="fairness_measures"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.fairness_measures.html" accesskey="U">fairness_measures</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FairnessMeasures</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="fairnessmeasures">
+<h1>FairnessMeasures<a class="headerlink" href="#fairnessmeasures" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="model_monitoring.fairness_measures.FairnessMeasures">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model_monitoring.fairness_measures.</span></span><span class="sig-name descname"><span class="pre">FairnessMeasures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">approach_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'supervised'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.fairness_measures.FairnessMeasures" title="Link to this definition">¶</a></dt>
+<dd><p>Classe utilizzata per calcolare e monitorare le metriche di fairness nei modelli di machine learning.</p>
+<p>La classe offre la possibilità di:</p>
+<ul>
+<li><p>Scegliere tra diversi approcci di fairness: “supervised” e “unsupervised”.</p></li>
+<li><p>Calcolare delle metriche di fairness standard predefinite, che variano in base al tipo di modello (quando <cite>set_metrics</cite> è “standard” o “add”). Metriche di Fairness Predefinite:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Per model_type=”classification”:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">statistical_parity_difference</span></code>: Monitora la differenza nel <strong>Positive Rate</strong> (tasso di predizioni positive, calcolato come <code class="docutils literal notranslate"><span class="pre">(TP+FP)/(TP+FP+TN+FN)</span></code>) tra i gruppi di fairness. Un valore vicino a 0 indica che le distribuzioni delle predizioni positive (gli “1”) sono simili nei gruppi di fainess. Se i gruppi di fairness sono più di due, si applica una logica “One-vs-all”, ovvero che ogni gruppo di fairness viene confrontato con tutti gli altri. Formula:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Pr(\hat{Y}={pos\_label}|D={unprivileged}) - Pr(\hat{Y}={pos\_label}|D={privileged})\]</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">disparate_impact_ratio</span></code>: Monitora il <strong>rapporto</strong> del <strong>Positive Rate</strong> tra i gruppi di fairness. Un valore vicino a 1 indica che le distribuzioni delle predizioni positive (gli “1”) sono simili nei gruppi di fainess.  Se i gruppi di fairness sono più di due, si applica una logica “One-vs-all”, ovvero che ogni gruppo di fairness viene confrontato con tutti gli altri. Formula:</p>
+<div class="math notranslate nohighlight">
+\[\frac{Pr(\hat{Y}={pos\_label}|D={unprivileged})}{Pr(\hat{Y}={pos\_label}|D={privileged})}\]</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">predictive_parity_difference</span></code>: Monitora la differenza nella <strong>Precision</strong> (Accuratezza delle predizioni positive, <code class="docutils literal notranslate"><span class="pre">TP</span> <span class="pre">/</span> <span class="pre">(TP</span> <span class="pre">+</span> <span class="pre">FP)</span></code>) tra i gruppi di fairness.  Un valore vicino a 0 indica che l’accuratezza delle predizioni positive (gli “1”) è simile nei gruppi di fainess. Se i gruppi di fairness sono più di due, si applica una logica “One-vs-all”, ovvero che ogni gruppo di fairness viene confrontato con tutti gli altri. Formula:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[prec_{D={unprivileged}} - prec_{D={privileged}}\]</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">equal_opportunity_difference</span></code>: Monitora la differenza nella <strong>Recall</strong> (Tasso di Veri Positivi, <code class="docutils literal notranslate"><span class="pre">TP</span> <span class="pre">/</span> <span class="pre">(TP</span> <span class="pre">+</span> <span class="pre">FN)</span></code>) tra i gruppi di fairness. Un valore vicino a 0 indica che il modello identifica correttamente i casi positivi reali con la stessa accuratezza per entrambi i gruppi. Se i gruppi di fairness sono più di due, si applica una logica “One-vs-all”, ovvero che ogni gruppo di fairness viene confrontato con tutti gli altri. Formula:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[TPR_{D={unprivileged}} - TPR_{D={privileged}}\]</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">average_odds_difference</span></code>: Monitora la media aritmetica della differenza nel <strong>False Positive Rate</strong> (Tasso di Falsi Positivi, <code class="docutils literal notranslate"><span class="pre">FP</span> <span class="pre">/</span> <span class="pre">(FP</span> <span class="pre">+</span> <span class="pre">TN)</span></code>) e della differenza nella <strong>Recall</strong> (Tasso di Veri Positivi) tra i gruppi di fairness. Un valore vicino a 0 indica un simile bilanciamento tra i tassi di veri positivi e falsi positivi per entrambi i gruppi. Se i gruppi di fairness sono più di due, si applica una logica “One-vs-all”, ovvero che ogni gruppo di fairness viene confrontato con tutti gli altri. Formula:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{(FPR_{D={unprivileged}} - FPR_{D={privileged}}) + (TPR_{D={unprivileged}} - TPR_{D={privileged}})}{2}\]</div>
+</li>
+<li><p><strong>Per model_type=”regression” (basate su Direct Density Ratio Estimation - DDRE):</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddre_independence</span></code>: Dato <cite>S</cite> l’insieme delle predizioni e <cite>A</cite> l’insieme dei gruppi di fairness, la metrica monitora l’indipendenza delle predizioni di un modello di regressione dai gruppi di fairness (<code class="docutils literal notranslate"><span class="pre">S⟂A</span></code>). Un valore vicino a 1 indica che le predizioni seguono la stessa distribuzione rispetto ai gruppi di fairness. Se i gruppi di fairness sono più di due, si applica una logica “One-vs-all”, ovvero che ogni gruppo di fairness viene confrontato con tutti gli altri. Formula:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{r}_{{ind}} = \frac{n_0}{n_1 n} \sum_{i=1}^{n} \frac{\rho(1|s_i)}{1 - \rho(1|s_i)}\]</div>
+<p>Nella formula si denota con <span class="math notranslate nohighlight">\(n_0\)</span>, <span class="math notranslate nohighlight">\(n_1\)</span> e <span class="math notranslate nohighlight">\(n\)</span> rispettivamente il numero delle righe relative al gruppo di Fairness di riferimento, a quello composto da tutti gli altri e al numero totale delle righe. Con <cite>⍴</cite> si denota un classificatore binario (Logistic Regression) per approssimare la densità di probabilità condizionata di un gruppo di fairness data la previsione.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddre_separation</span></code>: Dato <cite>S</cite> l’insieme delle predizioni, <cite>Y</cite> l’insieme dei valori del target vero e <cite>A</cite> l’insieme dei gruppi di fairness, la metrica monitora l’indipendenza delle predizioni di un modello di regressione dai gruppi di fairness, dato il target (<code class="docutils literal notranslate"><span class="pre">S⟂A</span> <span class="pre">|</span> <span class="pre">Y</span></code>). Un valore vicino a 1 indica che le predizioni rispetto al target seguono la stessa distribuzione rispetto ai gruppi di fairness. Se i gruppi di fairness sono più di due, si applica una logica “One-vs-all”, ovvero che ogni gruppo di fairness viene confrontato con tutti gli altri. Formula:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{r}_{{sep}} = \frac{1}{n} \sum_{i=1}^{n} \frac{\rho(1|y_i, s_i)}{1 - \rho(1|y_i, s_i)} \cdot \frac{1 - \rho(1|y_i)}{\rho(1|y_i)}\]</div>
+<p>Nella formula si denota con <span class="math notranslate nohighlight">\(n\)</span> rispettivamente il numero totale delle righe. Con <cite>⍴</cite> si denota un classificatore binario (Logistic Regression) per approssimare le densità di probabilità condizionate di un gruppo di fairness dato il target vero e data la previsione ed il target vero.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddre_sufficiency</span></code>: Dato <cite>S</cite> l’insieme delle predizioni, <cite>Y</cite> l’insieme dei valori del target vero e <cite>A</cite> l’insieme dei gruppi di fairness, la metrica monitora l’indipendenza del target vero dai gruppi di fairness, date le predizioni di un modello di regressione (<code class="docutils literal notranslate"><span class="pre">Y⟂A</span> <span class="pre">|</span> <span class="pre">S</span></code>). Un valore vicino a 1 indica che il target vero rispetto alle predizioni segue la stessa distribuzione trasversalmente ai gruppi di fairness. Se i gruppi di fairness sono più di due, si applica una logica “One-vs-all”, ovvero che ogni gruppo di fairness viene confrontato con tutti gli altri. Formula:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{r}_{{suf}} = \frac{1}{n} \sum_{i=1}^{n} \frac{\rho(1|y_i, s_i)}{1 - \rho(1|y_i, s_i)} \cdot \frac{1 - \rho(1|s_i)}{\rho(1|s_i)}\]</div>
+<p>Nella formula si denota con <span class="math notranslate nohighlight">\(n\)</span> rispettivamente il numero totale delle righe. Con <cite>⍴</cite> si denota un classificatore binario (Logistic Regression) per approssimare le densità di probabilità condizionate di un gruppo di fairness date le predizioni e data la previsione ed il target vero.</p>
+</li>
+<li><p><strong>Per model_type=”clustering” ( richiede approach_type = “unsupervised” ):</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddre_independence</span></code>: Dato <cite>S</cite> l’insieme delle etichette di clustering e <cite>A</cite> l’insieme dei gruppi di fairness, la metrica monitora l’indipendenza delle etichette di clustering dai gruppi di fairness (<code class="docutils literal notranslate"><span class="pre">S⟂A</span></code>). Un valore vicino a 1 indica che le etichette di clustering seguono la stessa distribuzione rispetto ai gruppi di fairness. Se i gruppi di fairness sono più di due, si applica una logica “One-vs-all”, ovvero che ogni gruppo di fairness viene confrontato con tutti gli altri.</p></li>
+</ul>
+</li>
+<li><p><strong>Per model_type=”multiclass”:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">statistical_parity_difference</span></code>: Come per la classificazione, ma calcolata per ogni classe contro tutte le altre e andando poi ad aggregare le singole metriche per classe al valore massimo in valore assoluto (default) o sommandone i valori in valore assoluto.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">predictive_parity_difference</span></code>: Come per la classificazione, ma calcolata per ogni classe contro tutte le altre e andando poi ad aggregare le singole metriche per classe al valore massimo in valore assoluto (default) o sommandone i valori in valore assoluto.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">equal_opportunity_difference</span></code>: Come per la classificazione, ma calcolata per ogni classe contro tutte le altre e andando poi ad aggregare le singole metriche per classe al valore massimo in valore assoluto (default) o sommandone i valori in valore assoluto.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">average_odds_difference</span></code>: Come per la classificazione, ma calcolata per ogni classe contro tutte le altre e andando poi ad aggregare le singole metriche per classe al valore massimo in valore assoluto (default) o sommandone i valori in valore assoluto.</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Aggiungere (<cite>set_metrics=”add”</cite>) o sostituire completamente (<cite>set_metrics=”new”</cite>) queste metriche di fairness con funzioni personalizzate fornite tramite il parametro <cite>new_metrics</cite>.</p></li>
+</ul>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="model_monitoring.fairness_measures.FairnessMeasures.__init__.html#model_monitoring.fairness_measures.FairnessMeasures.__init__" title="model_monitoring.fairness_measures.FairnessMeasures.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a></p></td>
+<td><p>Inizializza la classe <cite>FairnessMeasures</cite>, configurando le impostazioni necessarie per calcolare le metriche di fairness.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="model_monitoring.fairness_measures.FairnessMeasures.compute_metrics.html#model_monitoring.fairness_measures.FairnessMeasures.compute_metrics" title="model_monitoring.fairness_measures.FairnessMeasures.compute_metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_metrics</span></code></a></p></td>
+<td><p>Calcola le metriche di fairness basandosi sulle metriche di fairness impostate sui gruppi di fairness specificati.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">FairnessMeasures</a><ul>
+<li><a class="reference internal" href="#model_monitoring.fairness_measures.FairnessMeasures"><code class="docutils literal notranslate"><span class="pre">FairnessMeasures</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../model_monitoring.fairness_measures.html"
+                          title="previous chapter">fairness_measures</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.fairness_measures.FairnessMeasures.__init__.html"
+                          title="next chapter">FairnessMeasures.__init__</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.fairness_measures/model_monitoring.fairness_measures.FairnessMeasures.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_measures.FairnessMeasures.__init__.html" title="FairnessMeasures.__init__"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.fairness_measures.html" title="fairness_measures"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.fairness_measures.html" >fairness_measures</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FairnessMeasures</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

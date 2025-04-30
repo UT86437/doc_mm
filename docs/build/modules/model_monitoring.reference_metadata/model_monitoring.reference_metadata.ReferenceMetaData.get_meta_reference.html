@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ReferenceMetaData.get_meta_reference &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="XAI" href="../model_monitoring.XAI.html" />
+    <link rel="prev" title="ReferenceMetaData.get_meta_new" href="model_monitoring.reference_metadata.ReferenceMetaData.get_meta_new.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.XAI.html" title="XAI"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.reference_metadata.ReferenceMetaData.get_meta_new.html" title="ReferenceMetaData.get_meta_new"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.reference_metadata.html" >reference_metadata</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.reference_metadata.ReferenceMetaData.html" accesskey="U">ReferenceMetaData</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ReferenceMetaData.get_meta_reference</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="referencemetadata-get-meta-reference">
+<h1>ReferenceMetaData.get_meta_reference<a class="headerlink" href="#referencemetadata-get-meta-reference" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.reference_metadata.ReferenceMetaData.get_meta_reference">
+<span class="sig-prename descclassname"><span class="pre">ReferenceMetaData.</span></span><span class="sig-name descname"><span class="pre">get_meta_reference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feat_to_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bin_min_pct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.04</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.reference_metadata.ReferenceMetaData.get_meta_reference" title="Link to this definition">¶</a></dt>
+<dd><p>Genera un dizionario di metadati di riferimento per un dataset originale.</p>
+<p>Questo dizionario include informazioni sui tipi di variabili (numeriche o categoriche), valori minimi e massimi, distribuzioni a bin/categorie, e informazioni sui valori mancanti.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_reference</strong> (<cite>pd.DataFrame</cite>) – Dataset originale su cui basare la creazione dei metadati di riferimento.</p></li>
+<li><p><strong>feat_to_check</strong> (<cite>list</cite>, opzionale) – Lista delle feature da analizzare. Se <cite>None</cite>, vengono analizzate tutte le colonne di <cite>data_reference</cite>. Default: <cite>None</cite>.</p></li>
+<li><p><strong>nbins</strong> (<cite>int</cite>, opzionale) – Numero massimo di bin in cui suddividere le feature numeriche. Default: 1000.</p></li>
+<li><p><strong>bin_min_pct</strong> (<cite>float</cite>, opzionale) – Percentuale minima di osservazioni per ciascun bin. Default: 0.04 (4%).</p></li>
+<li><p><strong>missing_values</strong> (<cite>bool</cite>, opzionale) – Se <cite>True</cite>, includerà informazioni sui valori mancanti per ogni variabile. Default: <cite>True</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dizionario contenente i metadati di riferimento per ciascuna feature del dataset, inclusi tipo, valori minimi e massimi, distribuzioni a bin e percentuali di valori mancanti.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>dict</cite></p>
+</dd>
+</dl>
+<p><strong>Esempio:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">model_monitoring.reference_metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReferenceMetaData</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_storico</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;feature_num&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span><span class="s1">&#39;feature_cat&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RMD</span> <span class="o">=</span> <span class="n">ReferenceMetaData</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meta_storico</span> <span class="o">=</span> <span class="n">RMD</span><span class="o">.</span><span class="n">get_meta_reference</span><span class="p">(</span><span class="n">data_storico</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meta_storico</span>
+<span class="go">{&#39;feature_num&#39;: {&#39;type&#39;: &#39;numerical&#39;,</span>
+<span class="go">  &#39;min_val&#39;: 1,</span>
+<span class="go">  &#39;max_val&#39;: 10,</span>
+<span class="go">  &#39;not_missing_values&#39;: 10,</span>
+<span class="go">  &#39;bin_0&#39;: {&#39;min&#39;: -inf, &#39;max&#39;: 1.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">  &#39;bin_1&#39;: {&#39;min&#39;: 1.0, &#39;max&#39;: 2.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">  &#39;bin_2&#39;: {&#39;min&#39;: 2.0, &#39;max&#39;: 3.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">  &#39;bin_3&#39;: {&#39;min&#39;: 3.0, &#39;max&#39;: 4.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">  &#39;bin_4&#39;: {&#39;min&#39;: 4.0, &#39;max&#39;: 5.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">  &#39;bin_5&#39;: {&#39;min&#39;: 5.0, &#39;max&#39;: 6.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">  &#39;bin_6&#39;: {&#39;min&#39;: 6.0, &#39;max&#39;: 7.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">  &#39;bin_7&#39;: {&#39;min&#39;: 7.0, &#39;max&#39;: 8.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">  &#39;bin_8&#39;: {&#39;min&#39;: 8.0, &#39;max&#39;: 9.0, &#39;freq&#39;: 0.1},</span>
+<span class="go">  &#39;bin_9&#39;: {&#39;min&#39;: 9.0, &#39;max&#39;: inf, &#39;freq&#39;: 0.1},</span>
+<span class="go">  &#39;missing_values&#39;: 0.0},</span>
+<span class="go"> &#39;feature_cat&#39;: {&#39;type&#39;: &#39;categorical&#39;,</span>
+<span class="go">  &#39;not_missing_values&#39;: 10,</span>
+<span class="go">  &#39;A&#39;: {&#39;labels&#39;: [&#39;A&#39;], &#39;freq&#39;: 0.4},</span>
+<span class="go">  &#39;B&#39;: {&#39;labels&#39;: [&#39;B&#39;], &#39;freq&#39;: 0.3},</span>
+<span class="go">  &#39;C&#39;: {&#39;labels&#39;: [&#39;C&#39;], &#39;freq&#39;: 0.3},</span>
+<span class="go">  &#39;missing_values&#39;: 0.0}}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ReferenceMetaData.get_meta_reference</a><ul>
+<li><a class="reference internal" href="#model_monitoring.reference_metadata.ReferenceMetaData.get_meta_reference"><code class="docutils literal notranslate"><span class="pre">ReferenceMetaData.get_meta_reference()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.reference_metadata.ReferenceMetaData.get_meta_new.html"
+                          title="previous chapter">ReferenceMetaData.get_meta_new</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../model_monitoring.XAI.html"
+                          title="next chapter">XAI</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.reference_metadata/model_monitoring.reference_metadata.ReferenceMetaData.get_meta_reference.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.XAI.html" title="XAI"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.reference_metadata.ReferenceMetaData.get_meta_new.html" title="ReferenceMetaData.get_meta_new"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.reference_metadata.html" >reference_metadata</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.reference_metadata.ReferenceMetaData.html" >ReferenceMetaData</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ReferenceMetaData.get_meta_reference</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

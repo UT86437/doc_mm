@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Documentazione Model Monitoring &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=def86cc0" />
+    
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="data_drift" href="modules/model_monitoring.data_drift.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules/model_monitoring.data_drift.html" title="data_drift"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Documentazione Model Monitoring</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="documentazione-model-monitoring">
+<h1>Documentazione Model Monitoring<a class="headerlink" href="#documentazione-model-monitoring" title="Link to this heading">¶</a></h1>
+<p>Model Monitoring è una libreria che si propone di monitorare vari aspetti di un algoritmo di machine learning attraverso varie metriche aiutando l’utente a monitorare le prestazioni, la spiegabilità e la fairness dei modelli ML nel tempo e il drift dei dati su cui tali modelli fanno inferenza. La libreria fornisce moduli specializzati per:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Monitoraggio del Data Drift:</strong> Identifica quando i dati su cui il modello fa inferenza iniziano a differire significativamente dai dati di dataset di riferimento.</p></li>
+<li><p><strong>Monitoraggio della Fairness:</strong> Calcola metriche chiave di fairness e rileva eventuali variazioni (drift) nel tempo, assicurando che il modello rimanga equo per diversi gruppi.</p></li>
+<li><p><strong>Monitoraggio delle Performance:</strong> Calcola metriche di valutazione (per task supervisionati e non) e monitora il loro andamento per rilevare eventuali variazioni (drift) di efficacia del modello.</p></li>
+<li><p><strong>Monitoraggio basato su XAI:</strong> Utilizza tecniche di Explainable AI per interpretare il comportamento del modello e per monitorare specificamente il drift nelle spiegazioni o nell’importanza attribuita alle feature.</p></li>
+<li><p><strong>Gestione dei Metadati:</strong> Si occupa della creazione e l’utilizzo di metadati essenziali per i processi di monitoraggio.</p></li>
+</ul>
+</div></blockquote>
+<section id="moduli">
+<h2>Moduli<a class="headerlink" href="#moduli" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="modules/model_monitoring.data_drift.html#module-model_monitoring.data_drift" title="model_monitoring.data_drift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_monitoring.data_drift</span></code></a></p></td>
+<td><p>Classe utilizzata per monitorare e rilevare il Data Drift tra due dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="modules/model_monitoring.fairness_drift.html#module-model_monitoring.fairness_drift" title="model_monitoring.fairness_drift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_monitoring.fairness_drift</span></code></a></p></td>
+<td><p>Classe utilizzata per monitorare e rilevare il drift nelle metriche di fairness di un modello.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="modules/model_monitoring.fairness_measures.html#module-model_monitoring.fairness_measures" title="model_monitoring.fairness_measures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_monitoring.fairness_measures</span></code></a></p></td>
+<td><p>Classe utilizzata per calcolare e monitorare le metriche di fairness nei modelli di machine learning.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="modules/model_monitoring.model_performance.html#module-model_monitoring.model_performance" title="model_monitoring.model_performance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_monitoring.model_performance</span></code></a></p></td>
+<td><p>Classe utilizzata per monitorare e rilevare il drift nelle metriche di performance di un modello.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="modules/model_monitoring.performance_measures.html#module-model_monitoring.performance_measures" title="model_monitoring.performance_measures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_monitoring.performance_measures</span></code></a></p></td>
+<td><p>Classe che gestisce il calcolo delle metriche di performance per modelli supervisionati e non supervisionati.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="modules/model_monitoring.reference_metadata.html#module-model_monitoring.reference_metadata" title="model_monitoring.reference_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_monitoring.reference_metadata</span></code></a></p></td>
+<td><p>Classe per la gestione e la creazione di metadati di riferimento.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="modules/model_monitoring.XAI.html#module-model_monitoring.XAI" title="model_monitoring.XAI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_monitoring.XAI</span></code></a></p></td>
+<td><p>Classe per l'interpretabilità dei modelli di Machine Learning.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="modules/model_monitoring.XAI_drift.html#module-model_monitoring.XAI_drift" title="model_monitoring.XAI_drift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_monitoring.XAI_drift</span></code></a></p></td>
+<td><p>Classe per il monitoraggio del drift dello XAI (Explainable AI) di un modello.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="contenuti">
+<h2>Contenuti<a class="headerlink" href="#contenuti" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Moduli:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/model_monitoring.data_drift.html">data_drift</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_monitoring.data_drift/model_monitoring.data_drift.DataDrift.html">DataDrift</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.data_drift/model_monitoring.data_drift.DataDrift.html#model_monitoring.data_drift.DataDrift"><code class="docutils literal notranslate"><span class="pre">DataDrift</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.data_drift/model_monitoring.data_drift.DataDrift.__init__.html">DataDrift.__init__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.data_drift/model_monitoring.data_drift.DataDrift.get_meta_ref.html">DataDrift.get_meta_ref</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.data_drift/model_monitoring.data_drift.DataDrift.report_drift.html">DataDrift.report_drift</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/model_monitoring.fairness_drift.html">fairness_drift</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_monitoring.fairness_drift/model_monitoring.fairness_drift.FairnessDrift.html">FairnessDrift</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.fairness_drift/model_monitoring.fairness_drift.FairnessDrift.html#model_monitoring.fairness_drift.FairnessDrift"><code class="docutils literal notranslate"><span class="pre">FairnessDrift</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.fairness_drift/model_monitoring.fairness_drift.FairnessDrift.__init__.html">FairnessDrift.__init__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.fairness_drift/model_monitoring.fairness_drift.FairnessDrift.get_absolute_reduced.html">FairnessDrift.get_absolute_reduced</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.fairness_drift/model_monitoring.fairness_drift.FairnessDrift.get_relative_reduced.html">FairnessDrift.get_relative_reduced</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.fairness_drift/model_monitoring.fairness_drift.FairnessDrift.get_report_reduced.html">FairnessDrift.get_report_reduced</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/model_monitoring.fairness_measures.html">fairness_measures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_monitoring.fairness_measures/model_monitoring.fairness_measures.FairnessMeasures.html">FairnessMeasures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.fairness_measures/model_monitoring.fairness_measures.FairnessMeasures.html#model_monitoring.fairness_measures.FairnessMeasures"><code class="docutils literal notranslate"><span class="pre">FairnessMeasures</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.fairness_measures/model_monitoring.fairness_measures.FairnessMeasures.__init__.html">FairnessMeasures.__init__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.fairness_measures/model_monitoring.fairness_measures.FairnessMeasures.compute_metrics.html">FairnessMeasures.compute_metrics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/model_monitoring.model_performance.html">model_performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_monitoring.model_performance/model_monitoring.model_performance.PerformancesDrift.html">PerformancesDrift</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.model_performance/model_monitoring.model_performance.PerformancesDrift.html#model_monitoring.model_performance.PerformancesDrift"><code class="docutils literal notranslate"><span class="pre">PerformancesDrift</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.model_performance/model_monitoring.model_performance.PerformancesDrift.__init__.html">PerformancesDrift.__init__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.model_performance/model_monitoring.model_performance.PerformancesDrift.get_absolute.html">PerformancesDrift.get_absolute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.model_performance/model_monitoring.model_performance.PerformancesDrift.get_relative.html">PerformancesDrift.get_relative</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.model_performance/model_monitoring.model_performance.PerformancesDrift.get_report.html">PerformancesDrift.get_report</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/model_monitoring.performance_measures.html">performance_measures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_monitoring.performance_measures/model_monitoring.performance_measures.PerformancesMeasures.html">PerformancesMeasures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.performance_measures/model_monitoring.performance_measures.PerformancesMeasures.html#model_monitoring.performance_measures.PerformancesMeasures"><code class="docutils literal notranslate"><span class="pre">PerformancesMeasures</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.performance_measures/model_monitoring.performance_measures.PerformancesMeasures.__init__.html">PerformancesMeasures.__init__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.performance_measures/model_monitoring.performance_measures.PerformancesMeasures.compute_metrics.html">PerformancesMeasures.compute_metrics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/model_monitoring.reference_metadata.html">reference_metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_monitoring.reference_metadata/model_monitoring.reference_metadata.ReferenceMetaData.html">ReferenceMetaData</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.reference_metadata/model_monitoring.reference_metadata.ReferenceMetaData.html#model_monitoring.reference_metadata.ReferenceMetaData"><code class="docutils literal notranslate"><span class="pre">ReferenceMetaData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.reference_metadata/model_monitoring.reference_metadata.ReferenceMetaData.__init__.html">ReferenceMetaData.__init__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.reference_metadata/model_monitoring.reference_metadata.ReferenceMetaData.get_meta_new.html">ReferenceMetaData.get_meta_new</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.reference_metadata/model_monitoring.reference_metadata.ReferenceMetaData.get_meta_reference.html">ReferenceMetaData.get_meta_reference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/model_monitoring.XAI.html">XAI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_monitoring.XAI/model_monitoring.XAI.XAI.html">XAI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI/model_monitoring.XAI.XAI.html#model_monitoring.XAI.XAI"><code class="docutils literal notranslate"><span class="pre">XAI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI/model_monitoring.XAI.XAI.__init__.html">XAI.__init__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI/model_monitoring.XAI.XAI.fit.html">XAI.fit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI/model_monitoring.XAI.XAI.get_feature_importance.html">XAI.get_feature_importance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI/model_monitoring.XAI.XAI.get_report.html">XAI.get_report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI/model_monitoring.XAI.XAI.get_score.html">XAI.get_score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI/model_monitoring.XAI.XAI.plot.html">XAI.plot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/model_monitoring.XAI_drift.html">XAI_drift</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_monitoring.XAI_drift/model_monitoring.XAI_drift.XAIDrift.html">XAIDrift</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI_drift/model_monitoring.XAI_drift.XAIDrift.html#model_monitoring.XAI_drift.XAIDrift"><code class="docutils literal notranslate"><span class="pre">XAIDrift</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI_drift/model_monitoring.XAI_drift.XAIDrift.__init__.html">XAIDrift.__init__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI_drift/model_monitoring.XAI_drift.XAIDrift.get_drift.html">XAIDrift.get_drift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI_drift/model_monitoring.XAI_drift.XAIDrift.get_report.html">XAIDrift.get_report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_monitoring.XAI_drift/model_monitoring.XAI_drift.XAIDrift.plot.html">XAIDrift.plot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Documentazione Model Monitoring</a><ul>
+<li><a class="reference internal" href="#moduli">Moduli</a></li>
+<li><a class="reference internal" href="#contenuti">Contenuti</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="modules/model_monitoring.data_drift.html"
+                          title="next chapter">data_drift</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules/model_monitoring.data_drift.html" title="data_drift"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Documentazione Model Monitoring</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

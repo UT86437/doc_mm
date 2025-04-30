@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>DataDrift.__init__ &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="DataDrift.get_meta_ref" href="model_monitoring.data_drift.DataDrift.get_meta_ref.html" />
+    <link rel="prev" title="DataDrift" href="model_monitoring.data_drift.DataDrift.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.data_drift.DataDrift.get_meta_ref.html" title="DataDrift.get_meta_ref"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.data_drift.DataDrift.html" title="DataDrift"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.data_drift.html" >data_drift</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.data_drift.DataDrift.html" accesskey="U">DataDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">DataDrift.__init__</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="datadrift-init">
+<h1>DataDrift.__init__<a class="headerlink" href="#datadrift-init" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.data_drift.DataDrift.__init__">
+<span class="sig-prename descclassname"><span class="pre">DataDrift.</span></span><span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_stor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_curr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feat_to_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.data_drift.DataDrift.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Inizializza la classe <cite>DataDrift</cite>, configurando i dati di riferimento e i dati correnti, il tipo di dati, e le feature da monitorare.</p>
+<p>A seconda del tipo di dati forniti, la classe prepara i dati per il calcolo del data drift, infatti possono essere inseriti come input sia i dati in formato <cite>DataFrame</cite> che in formato <cite>dict</cite> nel caso fossero metadati.</p>
+<p>Inoltre, la classe verifica se esistono feature in comune tra i due dataset e, se necessario, configura le soglie per il monitoraggio del data drift. Se non vengono fornite soglie specifiche, vengono usate quelle predefinite.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_stor</strong> (<cite>pd.DataFrame</cite>/<cite>dict</cite>) – Il dataset storico (di riferimento) con cui confrontare il dataset corrente. Questo dataset contiene le informazioni da utilizzare per il confronto delle feature con i dati correnti.</p></li>
+<li><p><strong>data_curr</strong> (<cite>pd.DataFrame</cite>/<cite>dict</cite>) – Il dataset corrente che rappresenta i nuovi dati da analizzare. Questo dataset contiene i dati attuali da confrontare con quelli storici per il rilevamento del data drift.</p></li>
+<li><p><strong>type_data</strong> (<cite>str</cite>, opzionale) – <p>Indica il tipo di dati forniti:</p>
+<ul>
+<li><p>”auto”: La classe determina automaticamente se i dati sono <cite>DataFrame</cite> o metadati.</p></li>
+<li><p>”data”: I dati vengono forniti come <cite>DataFrame</cite> Pandas.</p></li>
+<li><p>”metadata”: I dati vengono forniti come metadati (dizionari).</p></li>
+</ul>
+<p>Default: “auto”.</p>
+</p></li>
+<li><p><strong>feat_to_check</strong> (<em>list</em><em>, </em><em>opzionale</em>) – Una lista delle feature da verificare. Se non specificato, verranno analizzate tutte le feature comuni tra i due dataset. Default: <cite>None</cite></p></li>
+<li><p><strong>config_threshold</strong> (<em>dict</em><em>, </em><em>opzionale</em>) – <p>Dizionario contenente le soglie PSI e p-value, che definiscono i limiti per il rilevamento del data drift. Se non fornito, vengono usate le soglie predefinite. Valori di default:</p>
+<ul>
+<li><p>Max PSI: 0.2</p></li>
+<li><p>Mid PSI: 0.1</p></li>
+<li><p>p-value: 0.05</p></li>
+</ul>
+<p>Default: <cite>None</cite></p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">DataDrift.__init__</a><ul>
+<li><a class="reference internal" href="#model_monitoring.data_drift.DataDrift.__init__"><code class="docutils literal notranslate"><span class="pre">DataDrift.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.data_drift.DataDrift.html"
+                          title="previous chapter">DataDrift</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.data_drift.DataDrift.get_meta_ref.html"
+                          title="next chapter">DataDrift.get_meta_ref</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.data_drift/model_monitoring.data_drift.DataDrift.__init__.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.data_drift.DataDrift.get_meta_ref.html" title="DataDrift.get_meta_ref"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.data_drift.DataDrift.html" title="DataDrift"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.data_drift.html" >data_drift</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.data_drift.DataDrift.html" >DataDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">DataDrift.__init__</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

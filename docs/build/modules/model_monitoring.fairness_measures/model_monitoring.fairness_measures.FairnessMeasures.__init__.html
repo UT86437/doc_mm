@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>FairnessMeasures.__init__ &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="FairnessMeasures.compute_metrics" href="model_monitoring.fairness_measures.FairnessMeasures.compute_metrics.html" />
+    <link rel="prev" title="FairnessMeasures" href="model_monitoring.fairness_measures.FairnessMeasures.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_measures.FairnessMeasures.compute_metrics.html" title="FairnessMeasures.compute_metrics"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_measures.FairnessMeasures.html" title="FairnessMeasures"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.fairness_measures.html" >fairness_measures</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.fairness_measures.FairnessMeasures.html" accesskey="U">FairnessMeasures</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FairnessMeasures.__init__</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="fairnessmeasures-init">
+<h1>FairnessMeasures.__init__<a class="headerlink" href="#fairnessmeasures-init" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.fairness_measures.FairnessMeasures.__init__">
+<span class="sig-prename descclassname"><span class="pre">FairnessMeasures.</span></span><span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">approach_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'supervised'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.fairness_measures.FairnessMeasures.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Inizializza la classe <cite>FairnessMeasures</cite>, configurando le impostazioni necessarie per calcolare le metriche di fairness.</p>
+<p>La funzione gestisce la scelta dell’approccio, del tipo di modello e delle metriche da calcolare, configurando l’analisi in base ai parametri forniti.</p>
+<p>A seconda dei parametri specificati, il costruttore imposta le metriche di fairness standard per il tipo di modello scelto oppure imposta, aggiunge o inizializza nuove metriche personalizzate. La classe supporta modelli supervisionati e non supervisionati.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>approach_type</strong> (<cite>str</cite>, opzionale) – <p>Tipo di approccio per l’analisi della fairness. Può essere:</p>
+<ul>
+<li><p><strong>”supervised”</strong>: Approccio supervisionato.</p></li>
+<li><p><strong>”unsupervised”</strong>: Approccio non supervisionato, generalmente utilizzato per il clustering.</p></li>
+</ul>
+<p>Default: “supervised”.</p>
+</p></li>
+<li><p><strong>model_type</strong> (<cite>str</cite>) – <p>Tipo di modello da analizzare. Può essere:</p>
+<ul>
+<li><p><strong>”auto”</strong>: La classe determinerà automaticamente il tipo di modello.</p></li>
+<li><p><strong>”regression”</strong>: Modello di regressione.</p></li>
+<li><p><strong>”classification”</strong>: Modello di classificazione binaria.</p></li>
+<li><p><strong>”multiclass”</strong>: Modello di classificazione multiclasse.</p></li>
+<li><p><strong>”clustering”</strong>: Modello di clustering (per approccio “unsupervised”).</p></li>
+</ul>
+<p>Default: “auto”.</p>
+</p></li>
+<li><p><strong>set_metrics</strong> (<cite>str</cite>, opzionale) – <p>Impostazioni per le metriche di fairness. Può essere:</p>
+<ul>
+<li><p><strong>”standard”</strong>: Vengono utilizzate le metriche di fairness predefinite per il tipo di modello.</p></li>
+<li><p><strong>”add”</strong>: Aggiunge nuove metriche a quelle standard.</p></li>
+<li><p><strong>”new”</strong>: Utilizza un nuovo insieme di metriche fornite dall’utente.</p></li>
+</ul>
+<p>Default: “standard”.</p>
+</p></li>
+<li><p><strong>new_metrics</strong> (<cite>list</cite>, opzionale) – Lista di nuove metriche da utilizzare quando <cite>set_metrics</cite> è impostato su “new” o “add”. Le metriche devono essere fornite come funzioni. Default: <cite>None</cite>.</p></li>
+<li><p><strong>**kwargs</strong> (<cite>dict</cite>, opzionale) – Parametri aggiuntivi che possono essere utilizzati per configurare ulteriormente la classe.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">FairnessMeasures.__init__</a><ul>
+<li><a class="reference internal" href="#model_monitoring.fairness_measures.FairnessMeasures.__init__"><code class="docutils literal notranslate"><span class="pre">FairnessMeasures.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.fairness_measures.FairnessMeasures.html"
+                          title="previous chapter">FairnessMeasures</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.fairness_measures.FairnessMeasures.compute_metrics.html"
+                          title="next chapter">FairnessMeasures.compute_metrics</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.fairness_measures/model_monitoring.fairness_measures.FairnessMeasures.__init__.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_measures.FairnessMeasures.compute_metrics.html" title="FairnessMeasures.compute_metrics"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_measures.FairnessMeasures.html" title="FairnessMeasures"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.fairness_measures.html" >fairness_measures</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.fairness_measures.FairnessMeasures.html" >FairnessMeasures</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FairnessMeasures.__init__</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

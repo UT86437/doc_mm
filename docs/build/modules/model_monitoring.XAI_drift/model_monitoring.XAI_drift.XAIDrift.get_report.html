@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>XAIDrift.get_report &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="XAIDrift.plot" href="model_monitoring.XAI_drift.XAIDrift.plot.html" />
+    <link rel="prev" title="XAIDrift.get_drift" href="model_monitoring.XAI_drift.XAIDrift.get_drift.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI_drift.XAIDrift.plot.html" title="XAIDrift.plot"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI_drift.XAIDrift.get_drift.html" title="XAIDrift.get_drift"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI_drift.html" >XAI_drift</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.XAI_drift.XAIDrift.html" accesskey="U">XAIDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAIDrift.get_report</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="xaidrift-get-report">
+<h1>XAIDrift.get_report<a class="headerlink" href="#xaidrift-get-report" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.XAI_drift.XAIDrift.get_report">
+<span class="sig-prename descclassname"><span class="pre">XAIDrift.</span></span><span class="sig-name descname"><span class="pre">get_report</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.XAI_drift.XAIDrift.get_report" title="Link to this definition">¶</a></dt>
+<dd><p>Restituisce il report sul drift dell’importanza delle feature.</p>
+<p>Questa funzione restituisce un <cite>DataFrame</cite> che contiene il report sul drift dell’importanza delle feature, ordinato in ordine crescente in base all’importanza delle feature nel modello storico.
+Il report include le informazioni sull’importanza delle feature nel modello corrente e storico, nonché eventuali drift rilevati in base al confronto tra i due e warning relativi.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Report con l’importanza delle feature nel modello corrente e storico, e l’eventuale drift rilevato con i relativi warning.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>pd.DataFrame</cite></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Se chiamato dopo il metodo <cite>get_drift</cite> il report presenterà anche informazioni sul drift tra il valore corrente e quello storico ed eventuli <cite>warning</cite> basati su di esso.</p></li>
+</ul>
+</div>
+<p><strong>Dati utilizzati per gli esempi:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_esempio_corr</span>
+</pre></div>
+</div>
+<style>
+   /* Stile base per la tabella con la nostra classe specifica */
+   .jupyter-style-table {
+       border-collapse: collapse; /* Bordi uniti */
+       margin: 1em 0; /* Margine sopra/sotto */
+       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Font simile a Jupyter */
+       font-size: 0.9em; /* Dimensione font leggermente ridotta */
+       border: 1px solid #d3d3d3; /* Bordo esterno leggero */
+       width: auto; /* Larghezza basata sul contenuto */
+       max-width: 100%; /* Non superare il contenitore */
+       overflow-x: auto; /* Abilita lo scroll orizzontale se necessario (meglio sul wrapper, ma ok qui) */
+       display: block; /* Necessario per far funzionare overflow-x su una tabella */
+   }
+
+   /* Stile per le celle dell'header (th) */
+   .jupyter-style-table thead th {
+       background-color: #f5f5f5; /* Sfondo grigio chiaro per header */
+       font-weight: bold; /* Grassetto */
+       padding: 8px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (spesso a destra per numeri/default) */
+       border-bottom: 1px solid #d3d3d3; /* Linea sotto l'header */
+       vertical-align: bottom; /* Allineamento verticale */
+   }
+
+   /* Stile per le celle dei dati (td) */
+   .jupyter-style-table tbody td {
+       padding: 6px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (aggiusta se hai testo a sinistra) */
+       border-right: 1px solid #d3d3d3; /* Linea verticale tra celle (opzionale) */
+       border-top: 1px solid #d3d3d3; /* Linea orizzontale tra righe */
+       vertical-align: middle; /* Allineamento verticale */
+   }
+   .jupyter-style-table tbody td:last-child {
+       border-right: none; /* Rimuovi bordo destro sull'ultima cella */
+   }
+
+   /* Stile per l'header dell'indice (se presente) */
+   .jupyter-style-table thead th.blank { /* Header vuoto sopra l'indice */
+       background-color: white;
+       border: none;
+   }
+   .jupyter-style-table tbody th { /* Celle dell'indice nel body */
+       padding: 6px 10px;
+       text-align: right;
+       font-weight: normal;
+       border-right: 1px solid #d3d3d3;
+       border-top: 1px solid #d3d3d3;
+       background-color: #f5f5f5; /* Sfondo leggero per indice */
+   }
+
+
+   /* Striping delle righe (alternanza colori) */
+   .jupyter-style-table tbody tr:nth-child(even) {
+       background-color: #f9f9f9; /* Sfondo molto leggero per righe pari */
+   }
+
+   /* Effetto Hover (cambio colore al passaggio del mouse) */
+   .jupyter-style-table tbody tr:hover {
+       background-color: #f0f0f0; /* Sfondo leggermente più scuro su hover */
+   }
+</style>
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>feature_num</th>      <th>feature_cat</th>      <th>pred_clf</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>1</td>      <td>A</td>      <td>0</td>    </tr>    <tr>      <th>1</th>      <td>3</td>      <td>B</td>      <td>1</td>    </tr>    <tr>      <th>2</th>      <td>1</td>      <td>A</td>      <td>0</td>    </tr>    <tr>      <th>3</th>      <td>1</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>4</th>      <td>1</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>5</th>      <td>3</td>      <td>A</td>      <td>1</td>    </tr>    <tr>      <th>6</th>      <td>1</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>7</th>      <td>1</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>8</th>      <td>1</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>9</th>      <td>3</td>      <td>A</td>      <td>1</td>    </tr>  </tbody></table><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_esempio_stor</span>
+</pre></div>
+</div>
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>feature_num</th>      <th>feature_cat</th>      <th>pred_clf</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>1</td>      <td>A</td>      <td>0</td>    </tr>    <tr>      <th>1</th>      <td>2</td>      <td>B</td>      <td>1</td>    </tr>    <tr>      <th>2</th>      <td>3</td>      <td>A</td>      <td>0</td>    </tr>    <tr>      <th>3</th>      <td>4</td>      <td>C</td>      <td>0</td>    </tr>    <tr>      <th>4</th>      <td>5</td>      <td>B</td>      <td>0</td>    </tr>    <tr>      <th>5</th>      <td>6</td>      <td>A</td>      <td>0</td>    </tr>    <tr>      <th>6</th>      <td>7</td>      <td>C</td>      <td>0</td>    </tr>    <tr>      <th>7</th>      <td>8</td>      <td>A</td>      <td>1</td>    </tr>    <tr>      <th>8</th>      <td>9</td>      <td>B</td>      <td>1</td>    </tr>    <tr>      <th>9</th>      <td>10</td>      <td>C</td>      <td>0</td>    </tr>  </tbody></table><p><strong>Esempio:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xai</span> <span class="o">=</span> <span class="n">XAI</span><span class="p">(</span><span class="n">model_input</span><span class="o">=</span><span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">modelLR</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Xai</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_esempio_corr</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pred_clf&#39;</span><span class="p">]),</span><span class="n">df_esempio_corr</span><span class="p">[</span><span class="s1">&#39;pred_clf&#39;</span><span class="p">],</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">importance_corr</span><span class="o">=</span><span class="n">Xai</span><span class="o">.</span><span class="n">get_feature_importance</span><span class="p">(</span><span class="n">feat_imp_mode</span><span class="o">=</span><span class="s1">&#39;coef&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">importance_corr</span>
+<span class="go">{&#39;type&#39;: &#39;coef&#39;,</span>
+<span class="go"> &#39;feat_importance&#39;: {&#39;feature_num&#39;: 0.8989692717116683,</span>
+<span class="go">  &#39;feature_cat&#39;: 0.1010307282883317}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Xai</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_esempio_stor</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pred_clf&#39;</span><span class="p">]),</span><span class="n">df_esempio_stor</span><span class="p">[</span><span class="s1">&#39;pred_clf&#39;</span><span class="p">],</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">importance_stor</span><span class="o">=</span><span class="n">Xai</span><span class="o">.</span><span class="n">get_feature_importance</span><span class="p">(</span><span class="n">feat_imp_mode</span><span class="o">=</span><span class="s1">&#39;coef&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">importance_stor</span>
+<span class="go">{&#39;type&#39;: &#39;coef&#39;,</span>
+<span class="go"> &#39;feat_importance&#39;: {&#39;feature_num&#39;: 0.5098198313687213,</span>
+<span class="go">  &#39;feature_cat&#39;: 0.4901801686312786}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">model_monitoring.XAI_drift</span><span class="w"> </span><span class="kn">import</span> <span class="n">XAIDrift</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XaiD</span> <span class="o">=</span> <span class="n">XAIDrift</span><span class="p">(</span><span class="n">importance_corr</span><span class="p">,</span><span class="n">importance_stor</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XaiD</span><span class="o">.</span><span class="n">get_report</span><span class="p">()</span>
+</pre></div>
+</div>
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>feature</th>      <th>curr_score</th>      <th>stor_score</th>    </tr>  </thead>  <tbody>    <tr>      <th>1</th>      <td>feature_cat</td>      <td>0.101031</td>      <td>0.49018</td>    </tr>    <tr>      <th>0</th>      <td>feature_num</td>      <td>0.898969</td>      <td>0.50982</td>    </tr>  </tbody></table><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">XaiD</span><span class="o">.</span><span class="n">get_drift</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XaiD</span><span class="o">.</span><span class="n">get_report</span><span class="p">()</span>
+</pre></div>
+</div>
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>control_type</th>      <th>feature</th>      <th>curr_score</th>      <th>stor_score</th>      <th>value</th>      <th>relative_warning</th>    </tr>  </thead>  <tbody>    <tr>      <th>1</th>      <td>feature drift perc</td>      <td>feature_cat</td>      <td>0.101031</td>      <td>0.49018</td>      <td>-79.389062</td>      <td>Red Alert</td>    </tr>    <tr>      <th>0</th>      <td>feature drift perc</td>      <td>feature_num</td>      <td>0.898969</td>      <td>0.50982</td>      <td>76.330777</td>      <td>Red Alert</td>    </tr>    <tr>      <th>2</th>      <td>psi xai score</td>      <td>xai_psi</td>      <td>NaN</td>      <td>NaN</td>      <td>0.835325</td>      <td>Red Alert</td>    </tr>  </tbody></table></dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">XAIDrift.get_report</a><ul>
+<li><a class="reference internal" href="#model_monitoring.XAI_drift.XAIDrift.get_report"><code class="docutils literal notranslate"><span class="pre">XAIDrift.get_report()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI_drift.XAIDrift.get_drift.html"
+                          title="previous chapter">XAIDrift.get_drift</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI_drift.XAIDrift.plot.html"
+                          title="next chapter">XAIDrift.plot</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.XAI_drift/model_monitoring.XAI_drift.XAIDrift.get_report.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI_drift.XAIDrift.plot.html" title="XAIDrift.plot"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI_drift.XAIDrift.get_drift.html" title="XAIDrift.get_drift"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI_drift.html" >XAI_drift</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.XAI_drift.XAIDrift.html" >XAIDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAIDrift.get_report</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

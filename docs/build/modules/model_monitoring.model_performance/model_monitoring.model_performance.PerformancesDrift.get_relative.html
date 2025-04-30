@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PerformancesDrift.get_relative &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="PerformancesDrift.get_report" href="model_monitoring.model_performance.PerformancesDrift.get_report.html" />
+    <link rel="prev" title="PerformancesDrift.get_absolute" href="model_monitoring.model_performance.PerformancesDrift.get_absolute.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.model_performance.PerformancesDrift.get_report.html" title="PerformancesDrift.get_report"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.model_performance.PerformancesDrift.get_absolute.html" title="PerformancesDrift.get_absolute"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.model_performance.html" >model_performance</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.model_performance.PerformancesDrift.html" accesskey="U">PerformancesDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PerformancesDrift.get_relative</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="performancesdrift-get-relative">
+<h1>PerformancesDrift.get_relative<a class="headerlink" href="#performancesdrift-get-relative" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.model_performance.PerformancesDrift.get_relative">
+<span class="sig-prename descclassname"><span class="pre">PerformancesDrift.</span></span><span class="sig-name descname"><span class="pre">get_relative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perf_metrics_stor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.model_performance.PerformancesDrift.get_relative" title="Link to this definition">¶</a></dt>
+<dd><p>Calcola il drift delle metriche di performance correnti rispetto alle metriche storiche.</p>
+<p>Il drift delle metriche viene calcolato confrontando le performance correnti con quelle storiche per ciascuna metrica, calcolando la differenza percentuale tra i due valori. Se la differenza supera una certa soglia, viene generato un <cite>warning</cite>.</p>
+<p>Il metodo genera nell’attributo <cite>report</cite>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>La colonna di warning <cite>relative_warning</cite> per le metriche di performance.</p></li>
+<li><p>La colonna delle performance delle metriche relative ai dati storici.</p></li>
+<li><p>La colonna relative al drift percentuale tra le performance delle metriche correnti e quelle storiche.</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>perf_metrics_stor</strong> (<em>dict</em>) – Dizionario contenente le metriche storiche di performance per il confronto relativo. Ogni chiave rappresenta una metrica e ogni valore è un altro dizionario che contiene le performance storiche.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Se le metriche correnti e storiche non sono compatibili, viene sollevato un <cite>warning</cite>.</p>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">PerformancesDrift.get_relative</a><ul>
+<li><a class="reference internal" href="#model_monitoring.model_performance.PerformancesDrift.get_relative"><code class="docutils literal notranslate"><span class="pre">PerformancesDrift.get_relative()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.model_performance.PerformancesDrift.get_absolute.html"
+                          title="previous chapter">PerformancesDrift.get_absolute</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.model_performance.PerformancesDrift.get_report.html"
+                          title="next chapter">PerformancesDrift.get_report</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.model_performance/model_monitoring.model_performance.PerformancesDrift.get_relative.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.model_performance.PerformancesDrift.get_report.html" title="PerformancesDrift.get_report"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.model_performance.PerformancesDrift.get_absolute.html" title="PerformancesDrift.get_absolute"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.model_performance.html" >model_performance</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.model_performance.PerformancesDrift.html" >PerformancesDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PerformancesDrift.get_relative</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

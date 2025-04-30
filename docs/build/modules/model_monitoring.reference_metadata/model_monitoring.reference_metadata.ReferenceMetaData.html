@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ReferenceMetaData &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ReferenceMetaData.__init__" href="model_monitoring.reference_metadata.ReferenceMetaData.__init__.html" />
+    <link rel="prev" title="reference_metadata" href="../model_monitoring.reference_metadata.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.reference_metadata.ReferenceMetaData.__init__.html" title="ReferenceMetaData.__init__"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.reference_metadata.html" title="reference_metadata"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.reference_metadata.html" accesskey="U">reference_metadata</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ReferenceMetaData</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="referencemetadata">
+<h1>ReferenceMetaData<a class="headerlink" href="#referencemetadata" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="model_monitoring.reference_metadata.ReferenceMetaData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model_monitoring.reference_metadata.</span></span><span class="sig-name descname"><span class="pre">ReferenceMetaData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta_ref_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.reference_metadata.ReferenceMetaData" title="Link to this definition">¶</a></dt>
+<dd><p>Classe per la gestione e la creazione di metadati di riferimento.</p>
+<p>La classe è utile per analizzare e mappare le feature di un dataset, includendo informazioni sui tipi di variabili, valori minimi e massimi, distribuzioni a bin e valori mancanti.</p>
+<p>La classe offre i metodi necessari per:</p>
+<ul class="simple">
+<li><p>Generare metadati di riferimento da un dataset di riferimento.</p></li>
+<li><p>Mappare in metadati un nuovo dataset con i metadati di riferimento .</p></li>
+</ul>
+<p>Le distribuzioni a bin rappresentano il risultato del processo di campionamento dei dati in gruppi ben definiti. Ogni bin ritorna il valore di occorrenza dei valori contenuti al suo interno. Per le feature categoriche, se questo valore non dovesse rispettare il valore minimo di occorrenza (vedi Note) il bin viene accorpato con il bin che ha la percentuale di occorrenza più bassa. Questo processo viene fatto in maniera iterativa fino a quando tutti i bin non risultano maggiori o uguali del valore minimo di occorrenza. Per le feature numeriche l’accorpamento viene fatto seguendo l’ordine della partizione.</p>
+<p>Il processo di <strong>campionamento</strong> si traduce in:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Prendere le <strong>feature numeriche</strong> e campionarle in bin creati appositamente, seguendo dei valori di impostazione definiti dall’utente o predefiniti. Questi bin saranno definiti tra un valore minimo e uno massimo, quindi tutti i valori compresi in questo intervallo entreranno a far parte di un bin piuttosto che un altro. I bin estremi avranno come valore minimo o massimo dell’intervallo il valore infinito (positivo o negativo) per comprendere tutti i valori possibli.</p></li>
+<li><p>Prendere le <strong>feature categoriche</strong> e campionarle in bin creati appositamente, seguendo dei valori di impostazione definiti dall’utente o predefiniti. Questi bin saranno definiti da una o più categorie, quindi tutti i valori appartenenti ad una delle categorie rappresentate da quel bin entreranno a far parte di esso. A differenza del caso delle feature numeriche in cui venivano considerati tutti i valori possibili qui vengono utilizzati solo i valori del dataset passato. Questo dettaglio comporta, per quanto riguarda la creazione dei metadati rispetto ad un altro dataset tramite il metodo <cite>get_meta_new</cite>, la creazione di un bin “fittizio” chiamato <cite>_other_</cite> in cui saranno presenti eventuali categorie non presenti nel dataset di riferimento.</p></li>
+</ul>
+</div></blockquote>
+<p>Le informazioni generate sono particolarmente utili in contesti di monitoraggio del modello, per verificare la coerenza tra i dati di addestramento e i nuovi dati in ingresso.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>I valori configurabili per la creazione dei bin sono il numero massimo di bin e la percentuale minima di occorrenza all’interno di ogni bin, rispettivamente i parametri <cite>nbins</cite> (default 1000) e <cite>bin_min_pct</cite> (default 0.04) nel metodo <cite>get_meta_reference</cite>.</p></li>
+</ul>
+</div>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="model_monitoring.reference_metadata.ReferenceMetaData.__init__.html#model_monitoring.reference_metadata.ReferenceMetaData.__init__" title="model_monitoring.reference_metadata.ReferenceMetaData.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a></p></td>
+<td><p>Inizializza la classe <cite>ReferenceMetaData</cite> con un dizionario di metadati di riferimento opzionale.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="model_monitoring.reference_metadata.ReferenceMetaData.get_meta_new.html#model_monitoring.reference_metadata.ReferenceMetaData.get_meta_new" title="model_monitoring.reference_metadata.ReferenceMetaData.get_meta_new"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_meta_new</span></code></a></p></td>
+<td><p>Recupera i metadati per un nuovo dataset mappandolo con un dizionario di metadati di riferimento.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="model_monitoring.reference_metadata.ReferenceMetaData.get_meta_reference.html#model_monitoring.reference_metadata.ReferenceMetaData.get_meta_reference" title="model_monitoring.reference_metadata.ReferenceMetaData.get_meta_reference"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_meta_reference</span></code></a></p></td>
+<td><p>Genera un dizionario di metadati di riferimento per un dataset originale.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ReferenceMetaData</a><ul>
+<li><a class="reference internal" href="#model_monitoring.reference_metadata.ReferenceMetaData"><code class="docutils literal notranslate"><span class="pre">ReferenceMetaData</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../model_monitoring.reference_metadata.html"
+                          title="previous chapter">reference_metadata</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.reference_metadata.ReferenceMetaData.__init__.html"
+                          title="next chapter">ReferenceMetaData.__init__</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.reference_metadata/model_monitoring.reference_metadata.ReferenceMetaData.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.reference_metadata.ReferenceMetaData.__init__.html" title="ReferenceMetaData.__init__"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.reference_metadata.html" title="reference_metadata"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.reference_metadata.html" >reference_metadata</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ReferenceMetaData</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

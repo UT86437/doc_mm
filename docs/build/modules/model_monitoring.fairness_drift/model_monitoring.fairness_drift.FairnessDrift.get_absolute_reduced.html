@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>FairnessDrift.get_absolute_reduced &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="FairnessDrift.get_relative_reduced" href="model_monitoring.fairness_drift.FairnessDrift.get_relative_reduced.html" />
+    <link rel="prev" title="FairnessDrift.__init__" href="model_monitoring.fairness_drift.FairnessDrift.__init__.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_drift.FairnessDrift.get_relative_reduced.html" title="FairnessDrift.get_relative_reduced"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_drift.FairnessDrift.__init__.html" title="FairnessDrift.__init__"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.fairness_drift.html" >fairness_drift</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.fairness_drift.FairnessDrift.html" accesskey="U">FairnessDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FairnessDrift.get_absolute_reduced</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="fairnessdrift-get-absolute-reduced">
+<h1>FairnessDrift.get_absolute_reduced<a class="headerlink" href="#fairnessdrift-get-absolute-reduced" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.fairness_drift.FairnessDrift.get_absolute_reduced">
+<span class="sig-prename descclassname"><span class="pre">FairnessDrift.</span></span><span class="sig-name descname"><span class="pre">get_absolute_reduced</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.fairness_drift.FairnessDrift.get_absolute_reduced" title="Link to this definition">¶</a></dt>
+<dd><p>Applica le soglie (predefinite o fornite) alle porformance delle metriche di fairness correnti.</p>
+<p>Questo metodo calcola lo stato di allarme (“red”, “yellow”) per ciascuna metrica di fairness configurata, basandosi sul confronto tra il valore di performance <strong>corrente</strong> e le soglie <strong>assolute</strong> definite.</p>
+<p>Per ogni metrica e per ogni gruppo di fairness viene generata una colonna di warning <cite>absolute_warning</cite> nell’attributo <cite>report_reduced</cite>. Questa colonna contiene eventuali <cite>warning</cite> basati sul superamento o meno delle soglie di performance delle metriche di fairness.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> (<em>metodo basato sulle metriche correnti e le soglie già impostate durante l'inizializzazione</em>)</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Il report aggiornato con queste colonne di allarme sarà quello restituito da successive chiamate a <cite>get_report_reduced()</cite>.</p>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">FairnessDrift.get_absolute_reduced</a><ul>
+<li><a class="reference internal" href="#model_monitoring.fairness_drift.FairnessDrift.get_absolute_reduced"><code class="docutils literal notranslate"><span class="pre">FairnessDrift.get_absolute_reduced()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.fairness_drift.FairnessDrift.__init__.html"
+                          title="previous chapter">FairnessDrift.__init__</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.fairness_drift.FairnessDrift.get_relative_reduced.html"
+                          title="next chapter">FairnessDrift.get_relative_reduced</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.fairness_drift/model_monitoring.fairness_drift.FairnessDrift.get_absolute_reduced.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_drift.FairnessDrift.get_relative_reduced.html" title="FairnessDrift.get_relative_reduced"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_drift.FairnessDrift.__init__.html" title="FairnessDrift.__init__"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.fairness_drift.html" >fairness_drift</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.fairness_drift.FairnessDrift.html" >FairnessDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FairnessDrift.get_absolute_reduced</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PerformancesDrift.get_report &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="performance_measures" href="../model_monitoring.performance_measures.html" />
+    <link rel="prev" title="PerformancesDrift.get_relative" href="model_monitoring.model_performance.PerformancesDrift.get_relative.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.performance_measures.html" title="performance_measures"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.model_performance.PerformancesDrift.get_relative.html" title="PerformancesDrift.get_relative"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.model_performance.html" >model_performance</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.model_performance.PerformancesDrift.html" accesskey="U">PerformancesDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PerformancesDrift.get_report</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="performancesdrift-get-report">
+<h1>PerformancesDrift.get_report<a class="headerlink" href="#performancesdrift-get-report" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="model_monitoring.model_performance.PerformancesDrift.get_report">
+<span class="sig-prename descclassname"><span class="pre">PerformancesDrift.</span></span><span class="sig-name descname"><span class="pre">get_report</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.model_performance.PerformancesDrift.get_report" title="Link to this definition">¶</a></dt>
+<dd><p>Restituisce un report comprensivo dei risultati del drift delle metriche di performance con warning assoluti e relativi.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> (<em>metodo basato sulle metriche correnti e le soglie già impostate durante l'inizializzazione ed eventualmente le metriche storiche</em>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Restituisce il report con le metriche di performance</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>pd.DataFrame</cite></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Se lanciato dopo <cite>get_absolute()</cite> conterrà anche i <cite>warning</cite> assoluti sulle performance delle metriche correnti.</p></li>
+<li><p>Se lanciato dopo <cite>get_relative()</cite> conterrà anche i <cite>warning</cite> relativi al drift sulle performance delle metriche correnti rispetto a quelle storiche.</p></li>
+<li><p>Se l’attributo <cite>return_prop_true</cite> dell’<cite>__init__</cite> della classe <strong>PerformancesMeasures</strong> è <cite>True</cite> il dizionario delle metriche di performance conterrà anche la percentuale di 1 (veri positivi) in un contesto di classificazione binaria, e di conseguenza il report conterrà anche la colonna <cite>proportion_1_curr</cite>, e <cite>proportion_1_stor</cite> se chiamato dopo <cite>get_relative()</cite>.</p></li>
+</ul>
+</div>
+<p><strong>Dati utilizzati per gli esempi</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_esempio_corr</span>
+</pre></div>
+</div>
+<style>
+   /* Stile base per la tabella con la nostra classe specifica */
+   .jupyter-style-table {
+       border-collapse: collapse; /* Bordi uniti */
+       margin: 1em 0; /* Margine sopra/sotto */
+       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Font simile a Jupyter */
+       font-size: 0.9em; /* Dimensione font leggermente ridotta */
+       border: 1px solid #d3d3d3; /* Bordo esterno leggero */
+       width: auto; /* Larghezza basata sul contenuto */
+       max-width: 100%; /* Non superare il contenitore */
+       overflow-x: auto; /* Abilita lo scroll orizzontale se necessario (meglio sul wrapper, ma ok qui) */
+       display: block; /* Necessario per far funzionare overflow-x su una tabella */
+   }
+
+   /* Stile per le celle dell'header (th) */
+   .jupyter-style-table thead th {
+       background-color: #f5f5f5; /* Sfondo grigio chiaro per header */
+       font-weight: bold; /* Grassetto */
+       padding: 8px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (spesso a destra per numeri/default) */
+       border-bottom: 1px solid #d3d3d3; /* Linea sotto l'header */
+       vertical-align: bottom; /* Allineamento verticale */
+   }
+
+   /* Stile per le celle dei dati (td) */
+   .jupyter-style-table tbody td {
+       padding: 6px 10px; /* Padding interno */
+       text-align: right; /* Allineamento testo (aggiusta se hai testo a sinistra) */
+       border-right: 1px solid #d3d3d3; /* Linea verticale tra celle (opzionale) */
+       border-top: 1px solid #d3d3d3; /* Linea orizzontale tra righe */
+       vertical-align: middle; /* Allineamento verticale */
+   }
+   .jupyter-style-table tbody td:last-child {
+       border-right: none; /* Rimuovi bordo destro sull'ultima cella */
+   }
+
+   /* Stile per l'header dell'indice (se presente) */
+   .jupyter-style-table thead th.blank { /* Header vuoto sopra l'indice */
+       background-color: white;
+       border: none;
+   }
+   .jupyter-style-table tbody th { /* Celle dell'indice nel body */
+       padding: 6px 10px;
+       text-align: right;
+       font-weight: normal;
+       border-right: 1px solid #d3d3d3;
+       border-top: 1px solid #d3d3d3;
+       background-color: #f5f5f5; /* Sfondo leggero per indice */
+   }
+
+
+   /* Striping delle righe (alternanza colori) */
+   .jupyter-style-table tbody tr:nth-child(even) {
+       background-color: #f9f9f9; /* Sfondo molto leggero per righe pari */
+   }
+
+   /* Effetto Hover (cambio colore al passaggio del mouse) */
+   .jupyter-style-table tbody tr:hover {
+       background-color: #f0f0f0; /* Sfondo leggermente più scuro su hover */
+   }
+</style>
+
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>feature_num</th>      <th>feature_cat</th>      <th>target_clf</th>      <th>pred_clf</th>      <th>target_reg</th>      <th>pred_reg</th>      <th>prob_clf</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>2</td>      <td>B</td>      <td>0</td>      <td>0</td>      <td>7.652628</td>      <td>-1.427613</td>      <td>0.032526</td>    </tr>    <tr>      <th>1</th>      <td>3</td>      <td>A</td>      <td>1</td>      <td>0</td>      <td>17.712800</td>      <td>3.589763</td>      <td>0.474443</td>    </tr>    <tr>      <th>2</th>      <td>4</td>      <td>C</td>      <td>0</td>      <td>0</td>      <td>17.682912</td>      <td>32.339399</td>      <td>0.482816</td>    </tr>    <tr>      <th>3</th>      <td>5</td>      <td>B</td>      <td>0</td>      <td>0</td>      <td>22.671351</td>      <td>20.413588</td>      <td>0.404199</td>    </tr>    <tr>      <th>4</th>      <td>6</td>      <td>A</td>      <td>0</td>      <td>1</td>      <td>31.209811</td>      <td>31.885093</td>      <td>0.652307</td>    </tr>    <tr>      <th>5</th>      <td>7</td>      <td>C</td>      <td>1</td>      <td>0</td>      <td>25.433599</td>      <td>11.186117</td>      <td>0.048836</td>    </tr>    <tr>      <th>6</th>      <td>8</td>      <td>D</td>      <td>0</td>      <td>1</td>      <td>31.375411</td>      <td>25.931584</td>      <td>0.842117</td>    </tr>    <tr>      <th>7</th>      <td>9</td>      <td>E</td>      <td>0</td>      <td>1</td>      <td>42.188562</td>      <td>43.297788</td>      <td>0.720076</td>    </tr>    <tr>      <th>8</th>      <td>10</td>      <td>C</td>      <td>0</td>      <td>1</td>      <td>44.935844</td>      <td>33.425909</td>      <td>0.561019</td>    </tr>    <tr>      <th>9</th>      <td>11</td>      <td>A</td>      <td>1</td>      <td>0</td>      <td>56.571237</td>      <td>60.328217</td>      <td>0.247588</td>    </tr>  </tbody></table><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_esempio_stor</span>
+</pre></div>
+</div>
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>feature_num</th>      <th>feature_cat</th>      <th>target_clf</th>      <th>pred_clf</th>      <th>target_reg</th>      <th>pred_reg</th>      <th>prob_clf</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>1</td>      <td>A</td>      <td>0</td>      <td>0</td>      <td>-1.131079</td>      <td>13.795709</td>      <td>0.041599</td>    </tr>    <tr>      <th>1</th>      <td>2</td>      <td>B</td>      <td>1</td>      <td>1</td>      <td>5.259965</td>      <td>12.331217</td>      <td>0.063112</td>    </tr>    <tr>      <th>2</th>      <td>3</td>      <td>A</td>      <td>0</td>      <td>0</td>      <td>12.151730</td>      <td>-6.433172</td>      <td>0.161446</td>    </tr>    <tr>      <th>3</th>      <td>4</td>      <td>C</td>      <td>0</td>      <td>0</td>      <td>15.114249</td>      <td>1.408011</td>      <td>0.321464</td>    </tr>    <tr>      <th>4</th>      <td>5</td>      <td>B</td>      <td>0</td>      <td>1</td>      <td>21.146841</td>      <td>17.845778</td>      <td>0.999736</td>    </tr>    <tr>      <th>5</th>      <td>6</td>      <td>A</td>      <td>1</td>      <td>1</td>      <td>29.831444</td>      <td>14.678544</td>      <td>0.140501</td>    </tr>    <tr>      <th>6</th>      <td>7</td>      <td>C</td>      <td>1</td>      <td>0</td>      <td>29.835704</td>      <td>41.836306</td>      <td>0.791112</td>    </tr>    <tr>      <th>7</th>      <td>8</td>      <td>A</td>      <td>1</td>      <td>0</td>      <td>45.712137</td>      <td>27.485945</td>      <td>0.936301</td>    </tr>    <tr>      <th>8</th>      <td>9</td>      <td>B</td>      <td>1</td>      <td>0</td>      <td>41.951110</td>      <td>44.644955</td>      <td>0.894670</td>    </tr>    <tr>      <th>9</th>      <td>10</td>      <td>C</td>      <td>1</td>      <td>0</td>      <td>57.347082</td>      <td>52.882838</td>      <td>0.109044</td>    </tr>  </tbody></table><p><strong>Esempio 1:</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Perf_Meas</span> <span class="o">=</span> <span class="n">PerformancesMeasures</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span> <span class="n">set_metrics</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span><span class="n">new_metrics</span><span class="o">=</span><span class="p">{</span><span class="n">lift_score</span><span class="p">:</span><span class="s2">&quot;prob&quot;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_perf</span> <span class="o">=</span> <span class="n">Perf_Meas</span><span class="o">.</span><span class="n">compute_metrics</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">df_esempio_corr</span><span class="p">[</span><span class="s1">&#39;target_clf&#39;</span><span class="p">],</span> <span class="n">predictions</span><span class="o">=</span><span class="n">df_esempio_corr</span><span class="p">[</span><span class="s1">&#39;pred_clf&#39;</span><span class="p">],</span> <span class="n">prob</span><span class="o">=</span><span class="n">df_esempio_corr</span><span class="p">[</span><span class="s1">&#39;prob_clf&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_perf</span>
+<span class="go">{&#39;balanced_accuracy_score&#39;: 0.21428571428571427,</span>
+<span class="go"> &#39;accuracy_score&#39;: 0.3,</span>
+<span class="go"> &#39;precision_score&#39;: 0.0,</span>
+<span class="go"> &#39;recall_score&#39;: 0.0,</span>
+<span class="go"> &#39;f1_score&#39;: 0.0,</span>
+<span class="go"> &#39;roc_auc_score&#39;: 0.1904761904761905,</span>
+<span class="go"> &#39;lift_score&#39;: 0.0,</span>
+<span class="go"> &#39;proportion_1&#39;: 0.3}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">old_perf</span> <span class="o">=</span> <span class="n">Perf_Meas</span><span class="o">.</span><span class="n">compute_metrics</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">df_esempio_stor</span><span class="p">[</span><span class="s1">&#39;target_clf&#39;</span><span class="p">],</span> <span class="n">predictions</span><span class="o">=</span><span class="n">df_esempio_stor</span><span class="p">[</span><span class="s1">&#39;pred_clf&#39;</span><span class="p">],</span> <span class="n">prob</span><span class="o">=</span><span class="n">df_esempio_stor</span><span class="p">[</span><span class="s1">&#39;prob_clf&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">old_perf</span>
+<span class="go">{&#39;balanced_accuracy_score&#39;: 0.5416666666666666,</span>
+<span class="go"> &#39;accuracy_score&#39;: 0.5,</span>
+<span class="go"> &#39;precision_score&#39;: 0.6666666666666666,</span>
+<span class="go"> &#39;recall_score&#39;: 0.3333333333333333,</span>
+<span class="go"> &#39;f1_score&#39;: 0.4444444444444444,</span>
+<span class="go"> &#39;roc_auc_score&#39;: 0.5,</span>
+<span class="go"> &#39;lift_score&#39;: 0.8333333333333334,</span>
+<span class="go"> &#39;proportion_1&#39;: 0.6}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">model_monitoring.model_performance</span><span class="w"> </span><span class="kn">import</span> <span class="n">PerformancesDrift</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Perf_Drift</span> <span class="o">=</span> <span class="n">PerformancesDrift</span><span class="p">(</span><span class="n">new_perf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Perf_Drift</span><span class="o">.</span><span class="n">get_report</span><span class="p">()</span>
+</pre></div>
+</div>
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>metric</th>      <th>proportion_1_curr</th>      <th>curr_perf</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>f1_score</td>      <td>0.3</td>      <td>0.000000</td>    </tr>    <tr>      <th>1</th>      <td>recall_score</td>      <td>0.3</td>      <td>0.000000</td>    </tr>    <tr>      <th>2</th>      <td>accuracy_score</td>      <td>0.3</td>      <td>0.300000</td>    </tr>    <tr>      <th>3</th>      <td>lift_score</td>      <td>0.3</td>      <td>0.000000</td>    </tr>    <tr>      <th>4</th>      <td>precision_score</td>      <td>0.3</td>      <td>0.000000</td>    </tr>    <tr>      <th>5</th>      <td>roc_auc_score</td>      <td>0.3</td>      <td>0.190476</td>    </tr>    <tr>      <th>6</th>      <td>balanced_accuracy_score</td>      <td>0.3</td>      <td>0.214286</td>    </tr>  </tbody></table><p><strong>Esempio 2: Uso con get_absolute</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Perf__Drift</span><span class="o">.</span><span class="n">get_absolute</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Perf__Drift</span><span class="o">.</span><span class="n">get_report</span><span class="p">()</span>
+</pre></div>
+</div>
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>metric</th>      <th>proportion_1_curr</th>      <th>curr_perf</th>      <th>absolute_warning</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>f1_score</td>      <td>0.3</td>      <td>0.000000</td>      <td>NaN</td>    </tr>    <tr>      <th>1</th>      <td>recall_score</td>      <td>0.3</td>      <td>0.000000</td>      <td>NaN</td>    </tr>    <tr>      <th>2</th>      <td>accuracy_score</td>      <td>0.3</td>      <td>0.300000</td>      <td>NaN</td>    </tr>    <tr>      <th>3</th>      <td>lift_score</td>      <td>0.3</td>      <td>0.000000</td>      <td>Red Alert</td>    </tr>    <tr>      <th>4</th>      <td>precision_score</td>      <td>0.3</td>      <td>0.000000</td>      <td>NaN</td>    </tr>    <tr>      <th>5</th>      <td>roc_auc_score</td>      <td>0.3</td>      <td>0.190476</td>      <td>Red Alert</td>    </tr>    <tr>      <th>6</th>      <td>balanced_accuracy_score</td>      <td>0.3</td>      <td>0.214286</td>      <td>Red Alert</td>    </tr>  </tbody></table><p><strong>Esempio 3: Uso con get_relative</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Perf__Drift</span><span class="o">.</span><span class="n">get_relative</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Perf__Drift</span><span class="o">.</span><span class="n">get_report</span><span class="p">()</span>
+</pre></div>
+</div>
+<table border="0" class="jupyter-style-table">  <thead>    <tr style="text-align: right;">      <th></th>      <th>metric</th>      <th>proportion_1_curr</th>      <th>curr_perf</th>      <th>absolute_warning</th>      <th>proportion_1_stor</th>      <th>stor_perf</th>      <th>drift_perc</th>      <th>relative_warning</th>    </tr>  </thead>  <tbody>    <tr>      <th>0</th>      <td>f1_score</td>      <td>0.3</td>      <td>0.000000</td>      <td>NaN</td>      <td>0.6</td>      <td>0.444444</td>      <td>-100.000000</td>      <td>Red Alert</td>    </tr>    <tr>      <th>1</th>      <td>recall_score</td>      <td>0.3</td>      <td>0.000000</td>      <td>NaN</td>      <td>0.6</td>      <td>0.333333</td>      <td>-100.000000</td>      <td>Red Alert</td>    </tr>    <tr>      <th>2</th>      <td>accuracy_score</td>      <td>0.3</td>      <td>0.300000</td>      <td>NaN</td>      <td>0.6</td>      <td>0.500000</td>      <td>-40.000000</td>      <td>Yellow Alert</td>    </tr>    <tr>      <th>3</th>      <td>lift_score</td>      <td>0.3</td>      <td>0.000000</td>      <td>Red Alert</td>      <td>0.6</td>      <td>0.833333</td>      <td>-100.000000</td>      <td>Red Alert</td>    </tr>    <tr>      <th>4</th>      <td>precision_score</td>      <td>0.3</td>      <td>0.000000</td>      <td>NaN</td>      <td>0.6</td>      <td>0.666667</td>      <td>-100.000000</td>      <td>Red Alert</td>    </tr>    <tr>      <th>5</th>      <td>roc_auc_score</td>      <td>0.3</td>      <td>0.190476</td>      <td>Red Alert</td>      <td>0.6</td>      <td>0.500000</td>      <td>-61.904762</td>      <td>Red Alert</td>    </tr>    <tr>      <th>6</th>      <td>balanced_accuracy_score</td>      <td>0.3</td>      <td>0.214286</td>      <td>Red Alert</td>      <td>0.6</td>      <td>0.541667</td>      <td>-60.439560</td>      <td>Red Alert</td>    </tr>  </tbody></table></dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">PerformancesDrift.get_report</a><ul>
+<li><a class="reference internal" href="#model_monitoring.model_performance.PerformancesDrift.get_report"><code class="docutils literal notranslate"><span class="pre">PerformancesDrift.get_report()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="model_monitoring.model_performance.PerformancesDrift.get_relative.html"
+                          title="previous chapter">PerformancesDrift.get_relative</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../model_monitoring.performance_measures.html"
+                          title="next chapter">performance_measures</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.model_performance/model_monitoring.model_performance.PerformancesDrift.get_report.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.performance_measures.html" title="performance_measures"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.model_performance.PerformancesDrift.get_relative.html" title="PerformancesDrift.get_relative"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.model_performance.html" >model_performance</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="model_monitoring.model_performance.PerformancesDrift.html" >PerformancesDrift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PerformancesDrift.get_report</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

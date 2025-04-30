@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>FairnessDrift &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="FairnessDrift.__init__" href="model_monitoring.fairness_drift.FairnessDrift.__init__.html" />
+    <link rel="prev" title="fairness_drift" href="../model_monitoring.fairness_drift.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_drift.FairnessDrift.__init__.html" title="FairnessDrift.__init__"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.fairness_drift.html" title="fairness_drift"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.fairness_drift.html" accesskey="U">fairness_drift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FairnessDrift</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="fairnessdrift">
+<h1>FairnessDrift<a class="headerlink" href="#fairnessdrift" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="model_monitoring.fairness_drift.FairnessDrift">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model_monitoring.fairness_drift.</span></span><span class="sig-name descname"><span class="pre">FairnessDrift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fair_metrics_curr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.fairness_drift.FairnessDrift" title="Link to this definition">¶</a></dt>
+<dd><p>Classe utilizzata per monitorare e rilevare il Drift nelle metriche di fairness di un modello.</p>
+<p>La classe supporta due tipi di input:</p>
+<ul class="simple">
+<li><p><strong>“curr_metrics”</strong>: le metriche correnti di fairness vengono fornite come dizionario contenente le performance per ogni metrica e gruppo.</p></li>
+<li><p><strong>“historic_metrics”</strong>: le metriche storiche di fairness vengono fornite come dizionario contenente le performance storiche per ogni metrica e gruppo.</p></li>
+</ul>
+<p>La classe verifica che le metriche correnti e storiche siano compatibili e abbiano gli stessi gruppi di fairness.</p>
+<p>Permette una configurazione flessibile dove è possibile definire le metriche da monitorare, le soglie di allarme e le logiche di analisi specifiche per ciascuna metrica, oppure una configurazione di default tramite un file interno <cite>params.yml</cite>.</p>
+<p><strong>Descrizione dei parametri di configurazione per metrica:</strong></p>
+<blockquote>
+<div><ul>
+<li><p><cite>logic</cite>: Specifica come interpretare il cambiamento della metrica ai fini del drift (vedi ‘Logiche di Drift Configurabili’ sotto).</p></li>
+<li><p><cite>axial_point</cite>: Il punto di riferimento numerico usato solo quando <cite>logic</cite> è impostato su ‘axial’.</p></li>
+<li><p><cite>relative</cite>: Contiene le soglie per il drift delle metriche di fairness.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>red</cite>/<cite>yellow</cite>: Soglie di variazione percentuale rispetto al valore storico.</p></li>
+<li><p><cite>absolute_tol</cite>: Valore di tolleranza assoluta utilizzato per prevenire che valori molto piccoli possano causare drift apparentemente grandi nelle metriche.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><cite>absolute</cite>: Contiene le soglie assolute per le performance delle metriche di fairness dei valori correnti.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>red</cite>/<cite>yellow</cite>: Valori numerici o intervalli (liste di due float <cite>[min, max]</cite>) che definiscono le soglie assolute per il valore corrente della metrica.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>Funzionalità Principali:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Monitoraggio Assoluto: Confronta le performance correnti delle metriche con le soglie <cite>absolute</cite> impostate. Genera avvisi di tipo “red alert” o “yellow alert” se queste soglie vengono superate.</p></li>
+<li><p>Monitoraggio Relativo: Valuta l’evoluzione delle metriche confrontando le performance correnti con quelle storiche. Genera avvisi basati sulle soglie <cite>relative</cite> impostate.</p></li>
+<li><p>Logiche di Drift Configurabili (<cite>logic</cite>): Permette di definire come interpretare una variazione di performance ai fini del drift, in base alla natura della metrica:</p>
+<ul>
+<li><p><cite>“increase”</cite>: Un <em>peggioramento</em> si verifica se la metrica <em>aumenta</em>
+(es. per metriche come il tasso di errore, dove un valore più basso è migliore).</p></li>
+<li><p><cite>“decrease”</cite>: Un <em>peggioramento</em> si verifica se la metrica <em>diminuisce</em>
+(es. per metriche come l’accuratezza, dove un valore più alto è migliore).</p></li>
+<li><p><cite>“axial”</cite>: Il drift viene valutato in base alla <em>deviazione</em> (in
+entrambe le direzioni) dal valore <cite>axial_point</cite> definito.</p></li>
+</ul>
+</li>
+<li><p>Reporting Dettagliato: Riassume tutte le analisi in un report <cite>pd.DataFrame</cite> completo che include le performance correnti per metrica e gruppo, gli allarmi assoluti e relativi scattati, e i valori di drift delle metriche calcolati (con differenze percentuali).</p></li>
+</ul>
+</div></blockquote>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="model_monitoring.fairness_drift.FairnessDrift.__init__.html#model_monitoring.fairness_drift.FairnessDrift.__init__" title="model_monitoring.fairness_drift.FairnessDrift.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a></p></td>
+<td><p>Inizializza la classe <cite>FairnessDrift</cite>, configurando le metriche di fairness correnti e le soglie di monitoraggio per le metriche di fairness.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="model_monitoring.fairness_drift.FairnessDrift.get_absolute_reduced.html#model_monitoring.fairness_drift.FairnessDrift.get_absolute_reduced" title="model_monitoring.fairness_drift.FairnessDrift.get_absolute_reduced"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_absolute_reduced</span></code></a></p></td>
+<td><p>Applica le soglie (predefinite o fornite) alle porformance delle metriche di fairness correnti.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="model_monitoring.fairness_drift.FairnessDrift.get_relative_reduced.html#model_monitoring.fairness_drift.FairnessDrift.get_relative_reduced" title="model_monitoring.fairness_drift.FairnessDrift.get_relative_reduced"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_relative_reduced</span></code></a></p></td>
+<td><p>Calcola il drift delle metriche di fairness correnti rispetto alle metriche storiche.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="model_monitoring.fairness_drift.FairnessDrift.get_report_reduced.html#model_monitoring.fairness_drift.FairnessDrift.get_report_reduced" title="model_monitoring.fairness_drift.FairnessDrift.get_report_reduced"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_report_reduced</span></code></a></p></td>
+<td><p>Restituisce un report comprensivo dei risultati del drift delle metriche di fairness con warning assoluti e relativi.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">FairnessDrift</a><ul>
+<li><a class="reference internal" href="#model_monitoring.fairness_drift.FairnessDrift"><code class="docutils literal notranslate"><span class="pre">FairnessDrift</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../model_monitoring.fairness_drift.html"
+                          title="previous chapter">fairness_drift</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.fairness_drift.FairnessDrift.__init__.html"
+                          title="next chapter">FairnessDrift.__init__</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.fairness_drift/model_monitoring.fairness_drift.FairnessDrift.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.fairness_drift.FairnessDrift.__init__.html" title="FairnessDrift.__init__"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.fairness_drift.html" title="fairness_drift"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.fairness_drift.html" >fairness_drift</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FairnessDrift</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>XAI &#8212; Documentazione_Model_Monitoring  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=def86cc0" />
+    
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="XAI.__init__" href="model_monitoring.XAI.XAI.__init__.html" />
+    <link rel="prev" title="XAI" href="../model_monitoring.XAI.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.__init__.html" title="XAI.__init__"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.XAI.html" title="XAI"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI.html" accesskey="U">XAI</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAI</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="xai">
+<h1>XAI<a class="headerlink" href="#xai" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="model_monitoring.XAI.XAI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">model_monitoring.XAI.</span></span><span class="sig-name descname"><span class="pre">XAI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">approach_type='supervised'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_input='default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_cv=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv_funct=&lt;class</span> <span class="pre">'sklearn.model_selection._search.RandomizedSearchCV'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv_scoring='auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter=40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv_type=StratifiedKFold(n_splits=5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state=42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle=True)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algo_type='auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_cat_threshold=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_monitoring.XAI.XAI" title="Link to this definition">¶</a></dt>
+<dd><p>Classe per l’interpretabilità dei modelli di Machine Learning.</p>
+<p>Questa classe facilita la comprensione del comportamento dei modelli di ML, principalmente attraverso il calcolo e l’analisi dell’importanza delle feature. Permette di addestrare un modello interno (LightGBM per default) o di utilizzare un modello custom. L’obbiettivo è quello di approssimare i risultati del modello originale con un altro modello addestrandolo (overfittando) sui dati originali come feature e le predizioni fatte dal modello originale come target.</p>
+<p>Supporta diversi metodi per calcolare l’importanza delle feature:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Valori SHAP (SHapley Additive exPlanations)</strong>:</p></li>
+</ul>
+<p>Attribuisce a ciascuna feature il cambiamento nel valore atteso della predizione del modello, basandosi su principi della teoria dei giochi (valori di Shapley) per garantire equità e consistenza. Possono essere calcolati per modelli ad albero, per modelli generici, o per reti neurali.</p>
+<ul class="simple">
+<li><p><strong>Permutation Importance</strong>:</p></li>
+</ul>
+<p>Misura l’importanza di una feature calcolando il calo di performance del modello (su un set di dati) quando i valori di quella specifica feature vengono mescolati casualmente (permutati), rompendo così la relazione tra la feature e il target.</p>
+<ul class="simple">
+<li><p><strong>Gini Importance</strong> (per modelli ad albero):</p></li>
+</ul>
+<p>Specifica per modelli basati su alberi decisionali, quantifica quanto mediamente una feature contribuisce a ridurre l’impurità (es. Gini impurity o entropia) nei nodi degli alberi in cui viene utilizzata per lo split.</p>
+<ul class="simple">
+<li><p><strong>Coefficienti del modello</strong> (per modelli lineari):</p></li>
+</ul>
+<p>Nei modelli lineari (come Regressione Lineare/Logistica), il coefficiente mostra l’impatto di una feature: indica di quanto varia la previsione del modello per ogni aumento di 1 unità della feature, se tutte le altre restano uguali. La grandezza del coefficiente (senza considerare il segno) misura quanto è forte questa influenza.</p>
+<p>La classe gestisce anche la preparazione dei dati, inclusa la codifica One-Hot delle variabili categoriche e l’ottimizzazione degli iperparametri tramite cross-validation.</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Il flusso tipico è: inizializzare <cite>XAI</cite>, chiamare <cite>fit</cite>, chiamare <cite>get_feature_importance</cite>, e poi <cite>get_report</cite>, <cite>get_score</cite>, o <cite>plot</cite>.</p></li>
+<li><p>Per l’approccio ‘unsupervised’ (clustering), viene addestrato un modello classificatore ausiliario per predire le etichette di cluster fornite.</p></li>
+</ul>
+</div>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="model_monitoring.XAI.XAI.__init__.html#model_monitoring.XAI.XAI.__init__" title="model_monitoring.XAI.XAI.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a></p></td>
+<td><p>Inizializza l'oggetto XAI configurando il modello e le opzioni di addestramento/interpretazione.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="model_monitoring.XAI.XAI.fit.html#model_monitoring.XAI.XAI.fit" title="model_monitoring.XAI.XAI.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a></p></td>
+<td><p>Addestra il modello utilizzando i dati forniti e i parametri configurati nella classe.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="model_monitoring.XAI.XAI.get_feature_importance.html#model_monitoring.XAI.XAI.get_feature_importance" title="model_monitoring.XAI.XAI.get_feature_importance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_importance</span></code></a></p></td>
+<td><p>Calcola e restituisce l'importanza delle feature del modello addestrato.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="model_monitoring.XAI.XAI.get_report.html#model_monitoring.XAI.XAI.get_report" title="model_monitoring.XAI.XAI.get_report"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_report</span></code></a></p></td>
+<td><p>Restituisce il report dell'importanza delle feature come <cite>DataFrame pandas</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="model_monitoring.XAI.XAI.get_score.html#model_monitoring.XAI.XAI.get_score" title="model_monitoring.XAI.XAI.get_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_score</span></code></a></p></td>
+<td><p>Calcola e restituisce uno score di performance del modello sui dati di addestramento.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="model_monitoring.XAI.XAI.plot.html#model_monitoring.XAI.XAI.plot" title="model_monitoring.XAI.XAI.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
+<td><p>Genera e visualizza un grafico a barre orizzontali dell'importanza delle feature.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">XAI</a><ul>
+<li><a class="reference internal" href="#model_monitoring.XAI.XAI"><code class="docutils literal notranslate"><span class="pre">XAI</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../model_monitoring.XAI.html"
+                          title="previous chapter">XAI</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="model_monitoring.XAI.XAI.__init__.html"
+                          title="next chapter">XAI.__init__</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/modules/model_monitoring.XAI/model_monitoring.XAI.XAI.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model_monitoring.XAI.XAI.__init__.html" title="XAI.__init__"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../model_monitoring.XAI.html" title="XAI"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentazione_Model_Monitoring  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../model_monitoring.XAI.html" >XAI</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">XAI</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Team AIS.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    </div>
+  </body>
+</html>
