@@ -9,7 +9,7 @@
 import pathlib
 import sys
 
-sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix() + "/src/model_monitoring")
+#sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix() + "/src/model_monitoring")
 project = "Documentazione_Model_Monitoring"
 copyright = "2025, Team AIS"
 author = "Team AIS"
