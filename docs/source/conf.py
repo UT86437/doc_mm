@@ -19,6 +19,8 @@ author = "Team AIS"
 
 extensions = ["sphinx.ext.autodoc", "sphinx.ext.autosummary", "sphinx.ext.napoleon"]
 
+autodoc_mock_imports = ['model_monitoring', 'model_monitoring.XAI', 'model_monitoring.data_drift', 'model_monitoring.reference_metadata', 'model_monitoring.performance_measures', 'model_monitoring.model_performance', 'model_monitoring.fairness_drift', 'model_monitoring.fairness_measures']
+
 templates_path = ["_templates"]
 exclude_patterns = []
 
