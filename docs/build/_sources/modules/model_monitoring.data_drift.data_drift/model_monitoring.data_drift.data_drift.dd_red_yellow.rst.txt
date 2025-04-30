@@ -1,0 +1,6 @@
+model\_monitoring.data\_drift.data\_drift.dd\_red\_yellow
+=========================================================
+
+.. currentmodule:: model_monitoring.data_drift.data_drift
+
+.. autofunction:: dd_red_yellow

@@ -1,0 +1,6 @@
+model\_monitoring.data\_drift.data\_drift.create\_stat\_table
+=============================================================
+
+.. currentmodule:: model_monitoring.data_drift.data_drift
+
+.. autofunction:: create_stat_table

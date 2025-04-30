@@ -1,0 +1,6 @@
+model\_monitoring.data\_drift.data\_drift.stat\_report
+======================================================
+
+.. currentmodule:: model_monitoring.data_drift.data_drift
+
+.. autofunction:: stat_report
