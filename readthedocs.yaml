@@ -6,5 +6,6 @@ build:
   jobs:
     build:
       html:
+        - rm -rf $READTHEDOCS_OUTPUT/html
         - mkdir --parents $READTHEDOCS_OUTPUT/html/
         - cp -r docs/build/* $READTHEDOCS_OUTPUT/html/
